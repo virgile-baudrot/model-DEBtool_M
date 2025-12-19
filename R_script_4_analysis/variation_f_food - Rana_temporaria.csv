@@ -1,0 +1,136 @@
+f,data,prd,RE,symbol,units,description,prd_f1
+1,35,35.16,0.004516,ab,d,age at birth,35.16
+1,45.75,38.97,0.1481,tj,d,time since birth at metam,38.97
+1,1095,1001,0.08587,tp,d,time since metam at puberty,1001
+1,5110,5070,0.007789,am,d,life span,5070
+1,1.5,2.021,0.3476,Lj,cm,body length at metam,2.021
+1,9,9.226,0.02511,Li,cm,ultimate body length,9.226
+1,0.05,0.04567,0.08658,Wwb,g,wet weight at birth,0.04567
+1,68.6,75.34,0.09831,Wwi,g,ultimate wet weight,75.34
+1,4.11,3.879,0.0561,Ri,#/d,maximum reprod rate,3.879
+0.99,35,35.17,0.004794,ab,d,age at birth,35.16
+0.99,45.75,39.05,0.1465,tj,d,time since birth at metam,38.97
+0.99,1095,1030,0.05976,tp,d,time since metam at puberty,1001
+0.99,5110,5070,0.00777,am,d,life span,5070
+0.99,1.5,02.02,0.3469,Lj,cm,body length at metam,2.021
+0.99,9,9.134,0.01486,Li,cm,ultimate body length,9.226
+0.99,0.05,0.04522,0.09568,Wwb,g,wet weight at birth,0.04567
+0.99,68.6,72.4,0.05541,Wwi,g,ultimate wet weight,75.34
+0.99,4.11,3.603,0.1232,Ri,#/d,maximum reprod rate,3.879
+0.98,35,35.18,0.005077,ab,d,age at birth,35.16
+0.98,45.75,39.12,0.1449,tj,d,time since birth at metam,38.97
+0.98,1095,1061,0.03103,tp,d,time since metam at puberty,1001
+0.98,5110,5070,0.007751,am,d,life span,5070
+0.98,1.5,2.019,0.3462,Lj,cm,body length at metam,2.021
+0.98,9,9.041,0.004608,Li,cm,ultimate body length,9.226
+0.98,0.05,0.04476,0.1048,Wwb,g,wet weight at birth,0.04567
+0.98,68.6,69.55,0.01379,Wwi,g,ultimate wet weight,75.34
+0.98,4.11,3.328,0.1901,Ri,#/d,maximum reprod rate,3.879
+0.97,35,35.19,0.005365,ab,d,age at birth,35.16
+0.97,45.75,39.2,0.1432,tj,d,time since birth at metam,38.97
+0.97,1095,1096,0.000794,tp,d,time since metam at puberty,1001
+0.97,5110,5070,0.007733,am,d,life span,5070
+0.97,1.5,2.018,0.3454,Lj,cm,body length at metam,2.021
+0.97,9,8.949,0.005643,Li,cm,ultimate body length,9.226
+0.97,0.05,0.04431,0.1139,Wwb,g,wet weight at birth,0.04567
+0.97,68.6,66.78,0.02659,Wwi,g,ultimate wet weight,75.34
+0.97,4.11,3.055,0.2566,Ri,#/d,maximum reprod rate,3.879
+0.96,35,35.2,0.00566,ab,d,age at birth,35.16
+0.96,45.75,39.28,0.1415,tj,d,time since birth at metam,38.97
+0.96,1095,1135,0.03632,tp,d,time since metam at puberty,1001
+0.96,5110,5071,0.007715,am,d,life span,5070
+0.96,1.5,2.017,0.3446,Lj,cm,body length at metam,2.021
+0.96,9,8.857,0.01589,Li,cm,ultimate body length,9.226
+0.96,0.05,0.04385,0.123,Wwb,g,wet weight at birth,0.04567
+0.96,68.6,64.09,0.06575,Wwi,g,ultimate wet weight,75.34
+0.96,4.11,2.783,0.3228,Ri,#/d,maximum reprod rate,3.879
+0.95,35,35.21,0.00596,ab,d,age at birth,35.16
+0.95,45.75,39.36,0.1397,tj,d,time since birth at metam,38.97
+0.95,1095,1179,0.07633,tp,d,time since metam at puberty,1001
+0.95,5110,5071,0.007698,am,d,life span,5070
+0.95,1.5,2.016,0.3438,Lj,cm,body length at metam,2.021
+0.95,9,8.765,0.02615,Li,cm,ultimate body length,9.226
+0.95,0.05,0.0434,0.1321,Wwb,g,wet weight at birth,0.04567
+0.95,68.6,61.48,0.1037,Wwi,g,ultimate wet weight,75.34
+0.95,4.11,2.512,0.3887,Ri,#/d,maximum reprod rate,3.879
+0.94,35,35.22,0.006266,ab,d,age at birth,35.16
+0.94,45.75,39.44,0.1379,tj,d,time since birth at metam,38.97
+0.94,1095,1228,0.1219,tp,d,time since metam at puberty,1001
+0.94,5110,5071,0.007681,am,d,life span,5070
+0.94,1.5,2.015,0.343,Lj,cm,body length at metam,2.021
+0.94,9,8.672,0.0364,Li,cm,ultimate body length,9.226
+0.94,0.05,0.04294,0.1412,Wwb,g,wet weight at birth,0.04567
+0.94,68.6,58.96,0.1405,Wwi,g,ultimate wet weight,75.34
+0.94,4.11,2.243,0.4543,Ri,#/d,maximum reprod rate,3.879
+0.93,35,35.23,0.006579,ab,d,age at birth,35.16
+0.93,45.75,39.52,0.1361,tj,d,time since birth at metam,38.97
+0.93,1095,1286,0.1744,tp,d,time since metam at puberty,1001
+0.93,5110,5071,0.007665,am,d,life span,5070
+0.93,1.5,2.013,0.3422,Lj,cm,body length at metam,2.021
+0.93,9,8.58,0.04665,Li,cm,ultimate body length,9.226
+0.93,0.05,0.04249,0.1503,Wwb,g,wet weight at birth,0.04567
+0.93,68.6,56.51,0.1762,Wwi,g,ultimate wet weight,75.34
+0.93,4.11,1.974,0.5197,Ri,#/d,maximum reprod rate,3.879
+0.92,35,35.24,0.006898,ab,d,age at birth,35.16
+0.92,45.75,39.61,0.1342,tj,d,time since birth at metam,38.97
+0.92,1095,1354,0.2361,tp,d,time since metam at puberty,1001
+0.92,5110,5071,0.007648,am,d,life span,5070
+0.92,1.5,2.012,0.3413,Lj,cm,body length at metam,2.021
+0.92,9,8.488,0.0569,Li,cm,ultimate body length,9.226
+0.92,0.05,0.04203,0.1594,Wwb,g,wet weight at birth,0.04567
+0.92,68.6,54.15,0.2107,Wwi,g,ultimate wet weight,75.34
+0.92,4.11,1.707,0.5847,Ri,#/d,maximum reprod rate,3.879
+0.91,35,35.25,0.007224,ab,d,age at birth,35.16
+0.91,45.75,39.7,0.1323,tj,d,time since birth at metam,38.97
+0.91,1095,1434,0.31,tp,d,time since metam at puberty,1001
+0.91,5110,5071,0.007632,am,d,life span,5070
+0.91,1.5,2.011,0.3405,Lj,cm,body length at metam,2.021
+0.91,9,8.396,0.06715,Li,cm,ultimate body length,9.226
+0.91,0.05,0.04158,0.1685,Wwb,g,wet weight at birth,0.04567
+0.91,68.6,51.85,0.2441,Wwi,g,ultimate wet weight,75.34
+0.91,4.11,1.44,0.6495,Ri,#/d,maximum reprod rate,3.879
+0.90,35,35.26,0.007557,ab,d,age at birth,35.16
+0.90,45.75,39.79,0.1303,tj,d,time since birth at metam,38.97
+0.90,1095,1534,0.4014,tp,d,time since metam at puberty,1001
+0.90,5110,5071,0.007616,am,d,life span,5070
+0.90,1.5,2.009,0.3396,Lj,cm,body length at metam,2.021
+0.90,9,8.303,0.0774,Li,cm,ultimate body length,9.226
+0.90,0.05,0.04112,0.1776,Wwb,g,wet weight at birth,0.04567
+0.90,68.6,49.63,0.2765,Wwi,g,ultimate wet weight,75.34
+0.90,4.11,1.175,0.7141,Ri,#/d,maximum reprod rate,3.879
+0.89,35,35.28,0.007897,ab,d,age at birth,35.16
+0.89,45.75,39.88,0.1283,tj,d,time since birth at metam,38.97
+0.89,1095,1663,0.5191,tp,d,time since metam at puberty,1001
+0.89,5110,5071,0.0076,am,d,life span,5070
+0.89,1.5,2.008,0.3387,Lj,cm,body length at metam,2.021
+0.89,9,8.211,0.08765,Li,cm,ultimate body length,9.226
+0.89,0.05,0.04067,0.1867,Wwb,g,wet weight at birth,0.04567
+0.89,68.6,47.48,0.3078,Wwi,g,ultimate wet weight,75.34
+0.89,4.11,0.9107,0.7784,Ri,#/d,maximum reprod rate,3.879
+0.88,35,35.29,0.008244,ab,d,age at birth,35.16
+0.88,45.75,39.98,0.1262,tj,d,time since birth at metam,38.97
+0.88,1095,1842,0.6819,tp,d,time since metam at puberty,1001
+0.88,5110,5071,0.007585,am,d,life span,5070
+0.88,1.5,2.007,0.3378,Lj,cm,body length at metam,2.021
+0.88,9,8.119,0.0979,Li,cm,ultimate body length,9.226
+0.88,0.05,0.04021,0.1958,Wwb,g,wet weight at birth,0.04567
+0.88,68.6,45.41,0.3381,Wwi,g,ultimate wet weight,75.34
+0.88,4.11,0.6475,0.8424,Ri,#/d,maximum reprod rate,3.879
+0.87,35,35.3,0.008599,ab,d,age at birth,35.16
+0.87,45.75,40.08,0.124,tj,d,time since birth at metam,38.97
+0.87,1095,2122,0.9378,tp,d,time since metam at puberty,1001
+0.87,5110,5071,0.007562,am,d,life span,5070
+0.87,1.5,2.005,0.3368,Lj,cm,body length at metam,2.021
+0.87,9,8.027,0.1082,Li,cm,ultimate body length,9.226
+0.87,0.05,0.03976,0.2049,Wwb,g,wet weight at birth,0.04567
+0.87,68.6,43.4,0.3674,Wwi,g,ultimate wet weight,75.34
+0.87,4.11,0,1,Ri,#/d,maximum reprod rate,3.879
+0.86,35,35.31,0.008962,ab,d,age at birth,35.16
+0.86,45.75,40.18,0.1219,tj,d,time since birth at metam,38.97
+0.86,1095,2756,1.517,tp,d,time since metam at puberty,1001
+0.86,5110,5071,0.007553,am,d,life span,5070
+0.86,1.5,2.004,0.3358,Lj,cm,body length at metam,2.021
+0.86,9,7.934,0.1184,Li,cm,ultimate body length,9.226
+0.86,0.05,0.0393,0.214,Wwb,g,wet weight at birth,0.04567
+0.86,68.6,41.46,0.3957,Wwi,g,ultimate wet weight,75.34
+0.86,4.11,0,1,Ri,#/d,maximum reprod rate,3.879

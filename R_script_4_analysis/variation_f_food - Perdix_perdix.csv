@@ -1,0 +1,111 @@
+f,data,prd,RE,symbol,units,description,prd_f1
+0.90,24,20.34,0.1525,ab,d,age at birth,20.22
+0.90,16,3.148,0.8033,tx,d,time since birth at fledging,2.993
+0.90,49,63.11,0.288,tp,d,time since birth at puberty,48.32
+0.90,365,365,0,tR,d,time since birth at first reproduction,365
+0.90,1898,1999,0.05318,am,d,life span,1910
+0.90,14.1,11.28,0.1999,Ww0,g,initial wet weight,12.24
+0.90,9.25,8.766,0.05231,Wwb,g,wet weight at birth,9.759
+0.90,386,264.5,0.3147,Wwi,g,ultimate wet weight,402.1
+0.90,404,265.4,0.343,Wwim,g,ultimate wet weight for males,403.5
+0.90,0.04384,0.01988,0.5466,Ri,#/d,maximum reprod rate,0.04348
+1.00,24,20.22,0.1575,ab,d,age at birth,20.22
+1.00,16,2.993,0.8129,tx,d,time since birth at fledging,2.993
+1.00,49,48.32,0.01397,tp,d,time since birth at puberty,48.32
+1.00,365,365,0,tR,d,time since birth at first reproduction,365
+1.00,1898,1910,0.006359,am,d,life span,1910
+1.00,14.1,12.24,0.1316,Ww0,g,initial wet weight,12.24
+1.00,9.25,9.759,0.05502,Wwb,g,wet weight at birth,9.759
+1.00,386,402.1,0.04175,Wwi,g,ultimate wet weight,402.1
+1.00,404,403.5,0.001329,Wwim,g,ultimate wet weight for males,403.5
+1.00,0.04384,0.04348,0.008124,Ri,#/d,maximum reprod rate,0.04348
+0.95,24,20.28,0.1551,ab,d,age at birth,20.22
+0.95,16,3.064,0.8085,tx,d,time since birth at fledging,2.993
+0.95,49,53.99,0.1018,tp,d,time since birth at puberty,48.32
+0.95,365,365,0,tR,d,time since birth at first reproduction,365
+0.95,1898,1956,0.03051,am,d,life span,1910
+0.95,14.1,11.76,0.1658,Ww0,g,initial wet weight,12.24
+0.95,9.25,9.263,0.00136,Wwb,g,wet weight at birth,9.759
+0.95,386,327.9,0.1504,Wwi,g,ultimate wet weight,402.1
+0.95,404,329,0.1855,Wwim,g,ultimate wet weight for males,403.5
+0.95,0.04384,0.03147,0.282,Ri,#/d,maximum reprod rate,0.04348
+0.99,24,20.23,0.157,ab,d,age at birth,20.22
+0.99,16,3.006,0.8121,tx,d,time since birth at fledging,2.993
+0.99,49,49.28,0.005712,tp,d,time since birth at puberty,48.32
+0.99,365,365,0,tR,d,time since birth at first reproduction,365
+0.99,1898,1919,0.0113,am,d,life span,1910
+0.99,14.1,12.15,0.1385,Ww0,g,initial wet weight,12.24
+0.99,9.25,9.66,0.04429,Wwb,g,wet weight at birth,9.759
+0.99,386,386.4,0.0009478,Wwi,g,ultimate wet weight,402.1
+0.99,404,387.7,0.04045,Wwim,g,ultimate wet weight for males,403.5
+0.99,0.04384,0.04104,0.06366,Ri,#/d,maximum reprod rate,0.04348
+0.98,24,20.24,0.1566,ab,d,age at birth,20.22
+0.98,16,3.02,0.8112,tx,d,time since birth at fledging,2.993
+0.98,49,50.32,0.02691,tp,d,time since birth at puberty,48.32
+0.98,365,365,0,tR,d,time since birth at first reproduction,365
+0.98,1898,1929,0.01619,am,d,life span,1910
+0.98,14.1,12.05,0.1453,Ww0,g,initial wet weight,12.24
+0.98,9.25,9.56,0.03356,Wwb,g,wet weight at birth,9.759
+0.98,386,371.1,0.03864,Wwi,g,ultimate wet weight,402.1
+0.98,404,372.3,0.0784,Wwim,g,ultimate wet weight for males,403.5
+0.98,0.04384,0.03863,0.1188,Ri,#/d,maximum reprod rate,0.04348
+0.97,24,20.25,0.1561,ab,d,age at birth,20.22
+0.97,16,3.035,0.8103,tx,d,time since birth at fledging,2.993
+0.97,49,51.44,0.04983,tp,d,time since birth at puberty,48.32
+0.97,365,365,0,tR,d,time since birth at first reproduction,365
+0.97,1898,1938,0.02102,am,d,life span,1910
+0.97,14.1,11.95,0.1522,Ww0,g,initial wet weight,12.24
+0.97,9.25,9.461,0.02283,Wwb,g,wet weight at birth,9.759
+0.97,386,356.3,0.07705,Wwi,g,ultimate wet weight,402.1
+0.97,404,357.5,0.1152,Wwim,g,ultimate wet weight for males,403.5
+0.97,0.04384,0.03623,0.1736,Ri,#/d,maximum reprod rate,0.04348
+0.96,24,20.26,0.1556,ab,d,age at birth,20.22
+0.96,16,3.049,0.8094,tx,d,time since birth at fledging,2.993
+0.96,49,52.66,0.07471,tp,d,time since birth at puberty,48.32
+0.96,365,365,0,tR,d,time since birth at first reproduction,365
+0.96,1898,1947,0.02579,am,d,life span,1910
+0.96,14.1,11.86,0.159,Ww0,g,initial wet weight,12.24
+0.96,9.25,9.362,0.01209,Wwb,g,wet weight at birth,9.759
+0.96,386,341.9,0.1143,Wwi,g,ultimate wet weight,402.1
+0.96,404,343,0.1509,Wwim,g,ultimate wet weight for males,403.5
+0.96,0.04384,0.03384,0.228,Ri,#/d,maximum reprod rate,0.04348
+0.94,24,20.29,0.1546,ab,d,age at birth,20.22
+0.94,16,3.08,0.8075,tx,d,time since birth at fledging,2.993
+0.94,49,55.45,0.1316,tp,d,time since birth at puberty,48.32
+0.94,365,365,0,tR,d,time since birth at first reproduction,365
+0.94,1898,1965,0.03517,am,d,life span,1910
+0.94,14.1,11.67,0.1726,Ww0,g,initial wet weight,12.24
+0.94,9.25,9.163,0.009373,Wwb,g,wet weight at birth,9.759
+0.94,386,314.4,0.1854,Wwi,g,ultimate wet weight,402.1
+0.94,404,315.5,0.2191,Wwim,g,ultimate wet weight for males,403.5
+0.94,0.04384,0.02912,0.3357,Ri,#/d,maximum reprod rate,0.04348
+0.93,24,20.3,0.1541,ab,d,age at birth,20.22
+0.93,16,3.096,0.8065,tx,d,time since birth at fledging,2.993
+0.93,49,57.06,0.1644,tp,d,time since birth at puberty,48.32
+0.93,365,365,0,tR,d,time since birth at first reproduction,365
+0.93,1898,1973,0.03977,am,d,life span,1910
+0.93,14.1,11.57,0.1794,Ww0,g,initial wet weight,12.24
+0.93,9.25,9.064,0.02011,Wwb,g,wet weight at birth,9.759
+0.93,386,301.4,0.2193,Wwi,g,ultimate wet weight,402.1
+0.93,404,302.4,0.2516,Wwim,g,ultimate wet weight for males,403.5
+0.93,0.04384,0.02679,0.3889,Ri,#/d,maximum reprod rate,0.04348
+0.92,24,20.31,0.1536,ab,d,age at birth,20.22
+0.92,16,3.113,0.8055,tx,d,time since birth at fledging,2.993
+0.92,49,58.84,0.2009,tp,d,time since birth at puberty,48.32
+0.92,365,365,0,tR,d,time since birth at first reproduction,365
+0.92,1898,1982,0.0443,am,d,life span,1910
+0.92,14.1,11.47,0.1863,Ww0,g,initial wet weight,12.24
+0.92,9.25,8.965,0.03084,Wwb,g,wet weight at birth,9.759
+0.92,386,288.7,0.2521,Wwi,g,ultimate wet weight,402.1
+0.92,404,289.6,0.283,Wwim,g,ultimate wet weight for males,403.5
+0.92,0.04384,0.02447,0.4418,Ri,#/d,maximum reprod rate,0.04348
+0.91,24,20.33,0.1531,ab,d,age at birth,20.22
+0.91,16,3.13,0.8044,tx,d,time since birth at fledging,2.993
+0.91,49,60.85,0.2418,tp,d,time since birth at puberty,48.32
+0.91,365,365,0,tR,d,time since birth at first reproduction,365
+0.91,1898,1991,0.04878,am,d,life span,1910
+0.91,14.1,11.38,0.1931,Ww0,g,initial wet weight,12.24
+0.91,9.25,8.865,0.04157,Wwb,g,wet weight at birth,9.759
+0.91,386,276.4,0.2839,Wwi,g,ultimate wet weight,402.1
+0.91,404,277.3,0.3135,Wwim,g,ultimate wet weight for males,403.5
+0.91,0.04384,0.02216,0.4944,Ri,#/d,maximum reprod rate,0.04348

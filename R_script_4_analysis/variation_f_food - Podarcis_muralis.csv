@@ -1,0 +1,181 @@
+f,data,prd,RE,symbol,units,description,prd_f1
+1,912.5,741.8,0.1871,tp,d,time since birth at puberty,741.8
+1,5840,5843,0.0004312,am,d,life span,5843
+1,2.41,2.352,0.02417,Lb,cm,SVL at hatching,2.352
+1,4.42,5.35,0.2103,Lp,cm,SVL at puberty for females,5.35
+1,4.99,4.992,0.0004384,Lpm,cm,SVL at puberty for males,4.992
+1,6.683,6.457,0.03382,Li,cm,ultimate SVL for females,6.457
+1,6.223,6.337,0.01831,Lim,cm,ultimate SVL for males,6.337
+1,0.98,0.994,0.01428,Ww0,g,wet weight of eggs,0.994
+1,0.36,0.2705,0.2485,Wwb,g,wet weight of hatchlings,0.2705
+1,5.078,5.599,0.1026,Wwi,g,ultimate wet weight,5.599
+1,5.95,6.049,0.01665,Wwim,g,ultimate wet weight for males,6.049
+1,0.0274,0.02474,0.09715,Ri,#/d,maximum reprod rate,0.02474
+0.99,912.5,757.5,0.1699,tp,d,time since birth at puberty,741.8
+0.99,5840,5843,0.0004692,am,d,life span,5843
+0.99,2.41,2.351,0.02429,Lb,cm,SVL at hatching,2.352
+0.99,4.42,5.336,0.2072,Lp,cm,SVL at puberty for females,5.35
+0.99,4.99,4.98,0.001905,Lpm,cm,SVL at puberty for males,4.992
+0.99,6.683,6.392,0.04348,Li,cm,ultimate SVL for females,6.457
+0.99,6.223,6.274,0.008127,Lim,cm,ultimate SVL for males,6.337
+0.99,0.98,0.9921,0.01233,Ww0,g,wet weight of eggs,0.994
+0.99,0.36,0.2684,0.2544,Wwb,g,wet weight of hatchlings,0.2705
+0.99,5.078,5.393,0.06197,Wwi,g,ultimate wet weight,5.599
+0.99,5.95,5.826,0.02087,Wwim,g,ultimate wet weight for males,6.049
+0.99,0.0274,0.02355,0.1405,Ri,#/d,maximum reprod rate,0.02474
+0.98,912.5,774.1,0.1517,tp,d,time since birth at puberty,741.8
+0.98,5840,5843,0.000506,am,d,life span,5843
+0.98,2.41,2.351,0.02442,Lb,cm,SVL at hatching,2.352
+0.98,4.42,5.321,0.2039,Lp,cm,SVL at puberty for females,5.35
+0.98,4.99,4.968,0.004309,Lpm,cm,SVL at puberty for males,4.992
+0.98,6.683,6.328,0.05315,Li,cm,ultimate SVL for females,6.457
+0.98,6.223,6.21,0.002056,Lim,cm,ultimate SVL for males,6.337
+0.98,0.98,0.9902,0.01039,Ww0,g,wet weight of eggs,0.994
+0.98,0.36,0.2663,0.2602,Wwb,g,wet weight of hatchlings,0.2705
+0.98,5.078,5.192,0.02245,Wwi,g,ultimate wet weight,5.599
+0.98,5.95,5.609,0.05735,Wwim,g,ultimate wet weight for males,6.049
+0.98,0.0274,0.02238,0.1832,Ri,#/d,maximum reprod rate,0.02474
+0.97,912.5,791.6,0.1325,tp,d,time since birth at puberty,741.8
+0.97,5840,5843,0.0005422,am,d,life span,5843
+0.97,2.41,2.351,0.02454,Lb,cm,SVL at hatching,2.352
+0.97,4.42,5.306,0.2005,Lp,cm,SVL at puberty for females,5.35
+0.97,4.99,4.956,0.006775,Lpm,cm,SVL at puberty for males,4.992
+0.97,6.683,6.263,0.06281,Li,cm,ultimate SVL for females,6.457
+0.97,6.223,6.147,0.01224,Lim,cm,ultimate SVL for males,6.337
+0.97,0.98,0.9883,0.00845,Ww0,g,wet weight of eggs,0.994
+0.97,0.36,0.2642,0.266,Wwb,g,wet weight of hatchlings,0.2705
+0.97,5.078,4.997,0.01597,Wwi,g,ultimate wet weight,5.599
+0.97,5.95,5.398,0.09281,Wwim,g,ultimate wet weight for males,6.049
+0.97,0.0274,0.02123,0.2251,Ri,#/d,maximum reprod rate,0.02474
+0.96,912.5,810.1,0.1122,tp,d,time since birth at puberty,741.8
+0.96,5840,5843,0.0005777,am,d,life span,5843
+0.96,2.41,2.351,0.02467,Lb,cm,SVL at hatching,2.352
+0.96,4.42,5.291,0.1971,Lp,cm,SVL at puberty for females,5.35
+0.96,4.99,4.944,0.009307,Lpm,cm,SVL at puberty for males,4.992
+0.96,6.683,6.199,0.07247,Li,cm,ultimate SVL for females,6.457
+0.96,6.223,6.083,0.02242,Lim,cm,ultimate SVL for males,6.337
+0.96,0.98,0.9864,0.006512,Ww0,g,wet weight of eggs,0.994
+0.96,0.36,0.2621,0.2719,Wwb,g,wet weight of hatchlings,0.2705
+0.96,5.078,4.807,0.0533,Wwi,g,ultimate wet weight,5.599
+0.96,5.95,5.193,0.1273,Wwim,g,ultimate wet weight for males,6.049
+0.96,0.0274,0.0201,0.2663,Ri,#/d,maximum reprod rate,0.02474
+0.95,912.5,829.8,0.09062,tp,d,time since birth at puberty,741.8
+0.95,5840,5844,0.0006125,am,d,life span,5843
+0.95,2.41,2.35,0.0248,Lb,cm,SVL at hatching,2.352
+0.95,4.42,5.275,0.1935,Lp,cm,SVL at puberty for females,5.35
+0.95,4.99,4.931,0.01191,Lpm,cm,SVL at puberty for males,4.992
+0.95,6.683,6.134,0.08213,Li,cm,ultimate SVL for females,6.457
+0.95,6.223,06.02,0.03261,Lim,cm,ultimate SVL for males,6.337
+0.95,0.98,0.9845,0.004578,Ww0,g,wet weight of eggs,0.994
+0.95,0.36,0.26,0.2777,Wwb,g,wet weight of hatchlings,0.2705
+0.95,5.078,4.623,0.08956,Wwi,g,ultimate wet weight,5.599
+0.95,5.95,4.994,0.1607,Wwim,g,ultimate wet weight for males,6.049
+0.95,0.0274,0.01899,0.3067,Ri,#/d,maximum reprod rate,0.02474
+0.94,912.5,850.7,0.06771,tp,d,time since birth at puberty,741.8
+0.94,5840,5844,0.000646,am,d,life span,5843
+0.94,2.41,2.35,0.02493,Lb,cm,SVL at hatching,2.352
+0.94,4.42,5.259,0.1899,Lp,cm,SVL at puberty for females,5.35
+0.94,4.99,4.917,0.01458,Lpm,cm,SVL at puberty for males,4.992
+0.94,6.683,06.07,0.09179,Li,cm,ultimate SVL for females,6.457
+0.94,6.223,5.957,0.04279,Lim,cm,ultimate SVL for males,6.337
+0.94,0.98,0.9826,0.002646,Ww0,g,wet weight of eggs,0.994
+0.94,0.36,0.2579,0.2835,Wwb,g,wet weight of hatchlings,0.2705
+0.94,5.078,4.444,0.1248,Wwi,g,ultimate wet weight,5.599
+0.94,5.95,4.8,0.1932,Wwim,g,ultimate wet weight for males,6.049
+0.94,0.0274,0.0179,0.3465,Ri,#/d,maximum reprod rate,0.02474
+0.93,912.5,873,0.04329,tp,d,time since birth at puberty,741.8
+0.93,5840,5844,0.000679,am,d,life span,5843
+0.93,2.41,2.35,0.02507,Lb,cm,SVL at hatching,2.352
+0.93,4.42,5.243,0.1861,Lp,cm,SVL at puberty for females,5.35
+0.93,4.99,4.904,0.01732,Lpm,cm,SVL at puberty for males,4.992
+0.93,6.683,6.005,0.1015,Li,cm,ultimate SVL for females,6.457
+0.93,6.223,5.893,0.05297,Lim,cm,ultimate SVL for males,6.337
+0.93,0.98,0.9807,0.0007183,Ww0,g,wet weight of eggs,0.994
+0.93,0.36,0.2558,0.2894,Wwb,g,wet weight of hatchlings,0.2705
+0.93,5.078,4.271,0.159,Wwi,g,ultimate wet weight,5.599
+0.93,5.95,4.613,0.2248,Wwim,g,ultimate wet weight for males,6.049
+0.93,0.0274,0.01684,0.3855,Ri,#/d,maximum reprod rate,0.02474
+0.92,912.5,896.8,0.0172,tp,d,time since birth at puberty,741.8
+0.92,5840,5844,0.0007126,am,d,life span,5843
+0.92,2.41,2.349,0.0252,Lb,cm,SVL at hatching,2.352
+0.92,4.42,5.225,0.1822,Lp,cm,SVL at puberty for females,5.35
+0.92,4.99,4.889,0.02015,Lpm,cm,SVL at puberty for males,4.992
+0.92,6.683,5.94,0.1111,Li,cm,ultimate SVL for females,6.457
+0.92,6.223,5.83,0.06315,Lim,cm,ultimate SVL for males,6.337
+0.92,0.98,0.9788,0.001206,Ww0,g,wet weight of eggs,0.994
+0.92,0.36,0.2537,0.2952,Wwb,g,wet weight of hatchlings,0.2705
+0.92,5.078,4.102,0.1921,Wwi,g,ultimate wet weight,5.599
+0.92,5.95,4.43,0.2554,Wwim,g,ultimate wet weight for males,6.049
+0.92,0.0274,0.01579,0.4238,Ri,#/d,maximum reprod rate,0.02474
+0.91,912.5,922.3,0.01077,tp,d,time since birth at puberty,741.8
+0.91,5840,5844,0.0007448,am,d,life span,5843
+0.91,2.41,2.349,0.02534,Lb,cm,SVL at hatching,2.352
+0.91,4.42,5.208,0.1782,Lp,cm,SVL at puberty for females,5.35
+0.91,4.99,4.875,0.02305,Lpm,cm,SVL at puberty for males,4.992
+0.91,6.683,5.876,0.1208,Li,cm,ultimate SVL for females,6.457
+0.91,6.223,5.767,0.07334,Lim,cm,ultimate SVL for males,6.337
+0.91,0.98,0.9769,0.003128,Ww0,g,wet weight of eggs,0.994
+0.91,0.36,0.2516,0.301,Wwb,g,wet weight of hatchlings,0.2705
+0.91,5.078,3.939,0.2243,Wwi,g,ultimate wet weight,5.599
+0.91,5.95,4.254,0.2851,Wwim,g,ultimate wet weight for males,6.049
+0.91,0.0274,0.01475,0.4615,Ri,#/d,maximum reprod rate,0.02474
+0.90,912.5,949.8,0.04087,tp,d,time since birth at puberty,741.8
+0.90,5840,5845,0.0007761,am,d,life span,5843
+0.90,2.41,2.349,0.02548,Lb,cm,SVL at hatching,2.352
+0.90,4.42,5.19,0.1741,Lp,cm,SVL at puberty for females,5.35
+0.90,4.99,4.86,0.02604,Lpm,cm,SVL at puberty for males,4.992
+0.90,6.683,5.811,0.1304,Li,cm,ultimate SVL for females,6.457
+0.90,6.223,5.703,0.08352,Lim,cm,ultimate SVL for males,6.337
+0.90,0.98,0.9751,0.005045,Ww0,g,wet weight of eggs,0.994
+0.90,0.36,0.2495,0.3069,Wwb,g,wet weight of hatchlings,0.2705
+0.90,5.078,3.78,0.2556,Wwi,g,ultimate wet weight,5.599
+0.90,5.95,4.082,0.3139,Wwim,g,ultimate wet weight for males,6.049
+0.90,0.0274,0.01374,0.4984,Ri,#/d,maximum reprod rate,0.02474
+0.85,912.5,1127,0.2355,tp,d,time since birth at puberty,741.8
+0.85,5840,5845,0.0009229,am,d,life span,5843
+0.85,2.41,2.347,0.02622,Lb,cm,SVL at hatching,2.352
+0.85,4.42,5.089,0.1514,Lp,cm,SVL at puberty for females,5.35
+0.85,4.99,4.778,0.04244,Lpm,cm,SVL at puberty for males,4.992
+0.85,6.683,5.488,0.1787,Li,cm,ultimate SVL for females,6.457
+0.85,6.223,5.386,0.1344,Lim,cm,ultimate SVL for males,6.337
+0.85,0.98,0.9657,0.01458,Ww0,g,wet weight of eggs,0.994
+0.85,0.36,0.239,0.336,Wwb,g,wet weight of hatchlings,0.2705
+0.85,5.078,3.058,0.3979,Wwi,g,ultimate wet weight,5.599
+0.85,5.95,3.301,0.4452,Wwim,g,ultimate wet weight for males,6.049
+0.85,0.0274,0.008964,0.6728,Ri,#/d,maximum reprod rate,0.02474
+0.80,912.5,1437,0.5749,tp,d,time since birth at puberty,741.8
+0.80,5840,5846,0.001053,am,d,life span,5843
+0.80,2.41,2.345,0.02701,Lb,cm,SVL at hatching,2.352
+0.80,4.42,4.968,0.1241,Lp,cm,SVL at puberty for females,5.35
+0.80,4.99,4.682,0.0618,Lpm,cm,SVL at puberty for males,4.992
+0.80,6.683,5.166,0.2271,Li,cm,ultimate SVL for females,6.457
+0.80,6.223,05.07,0.1854,Lim,cm,ultimate SVL for males,6.337
+0.80,0.98,0.9565,0.02401,Ww0,g,wet weight of eggs,0.994
+0.80,0.36,0.2285,0.3651,Wwb,g,wet weight of hatchlings,0.2705
+0.80,5.078,2.443,0.5189,Wwi,g,ultimate wet weight,5.599
+0.80,5.95,2.637,0.5568,Wwim,g,ultimate wet weight for males,6.049
+0.80,0.0274,0.004643,0.8305,Ri,#/d,maximum reprod rate,0.02474
+0.75,912.5,2409,1.64,tp,d,time since birth at puberty,741.8
+0.75,5840,5847,0.001167,am,d,life span,5843
+0.75,2.41,2.343,0.02788,Lb,cm,SVL at hatching,2.352
+0.75,4.42,4.815,0.08945,Lp,cm,SVL at puberty for females,5.35
+0.75,4.99,4.564,0.08529,Lpm,cm,SVL at puberty for males,4.992
+0.75,6.683,4.843,0.2754,Li,cm,ultimate SVL for females,6.457
+0.75,6.223,4.753,0.2363,Lim,cm,ultimate SVL for males,6.337
+0.75,0.98,0.9473,0.03332,Ww0,g,wet weight of eggs,0.994
+0.75,0.36,0.2181,0.3943,Wwb,g,wet weight of hatchlings,0.2705
+0.75,5.078,1.926,0.6207,Wwi,g,ultimate wet weight,5.599
+0.75,5.95,2.078,0.6507,Wwim,g,ultimate wet weight for males,6.049
+0.75,0.0274,0.0007602,0.9723,Ri,#/d,maximum reprod rate,0.02474
+0.74,912.5,4123,3.518,tp,d,time since birth at puberty,741.8
+0.74,5840,5847,0.001187,am,d,life span,5843
+0.74,2.41,2.342,0.02806,Lb,cm,SVL at hatching,2.352
+0.74,4.42,4.777,0.08079,Lp,cm,SVL at puberty for females,5.35
+0.74,4.99,4.538,0.09065,Lpm,cm,SVL at puberty for males,4.992
+0.74,6.683,4.778,0.285,Li,cm,ultimate SVL for females,6.457
+0.74,6.223,4.689,0.2465,Lim,cm,ultimate SVL for males,6.337
+0.74,0.98,0.9455,0.03517,Ww0,g,wet weight of eggs,0.994
+0.74,0.36,0.216,0.4001,Wwb,g,wet weight of hatchlings,0.2705
+0.74,5.078,1.833,0.639,Wwi,g,ultimate wet weight,5.599
+0.74,5.95,1.978,0.6676,Wwim,g,ultimate wet weight for males,6.049
+0.74,0.0274,3.469e-05,0.9987,Ri,#/d,maximum reprod rate,0.02474

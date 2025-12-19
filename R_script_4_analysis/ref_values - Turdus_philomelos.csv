@@ -1,0 +1,9 @@
+symbol,units,description,min,max
+ab,d,age at birth,10,17
+tx,d,time since birth at fledging,11,17
+tp,d,time since birth at puberty,NA,NA
+tR,d,time since birth at 1st brood,365,365
+am,d,life span,5106,6465
+Wwb,g,wet weight at birth,6,6.25
+Wwi,g,ultimate wet weight for female,65.7,73.2
+Ri,#/d,maximum reprod rate,0.008,0.016

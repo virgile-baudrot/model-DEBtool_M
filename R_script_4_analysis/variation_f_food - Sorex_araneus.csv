@@ -1,0 +1,151 @@
+f,data,prd,RE,symbol,units,description,prd_f1
+1,21,21.1,0.004748,tg,d,gestation time,21.1
+1,23,19.03,0.1725,tx,d,time since birth at weaning,19.03
+1,198,105,0.4696,tp,d,time since birth at puberty,105
+1,1168,978.5,0.1623,am,d,life span,978.5
+1,6,6.659,0.1099,Li,cm,ultimate total length,6.659
+1,0.44,0.4651,0.05713,Wwb,g,wet weight at birth,0.4651
+1,7.6,11.02,0.4506,Wwx,g,wet weight at weaning,11.02
+1,8.2,12.08,0.4726,Wwp,g,wet weight at puberty,12.08
+1,8.4,12.08,0.4376,Wwi,g,ultimate wet weight,12.08
+1,0.04932,0.1602,2.249,Ri,#/d,maximum reprod rate,0.1602
+0.99,21,21.1,0.004748,tg,d,gestation time,21.1
+0.99,23,19.35,0.1586,tx,d,time since birth at weaning,19.03
+0.99,198,110,0.4443,tp,d,time since birth at puberty,105
+0.99,1168,996.3,0.147,am,d,life span,978.5
+0.99,6,6.593,0.09877,Li,cm,ultimate total length,6.659
+0.99,0.44,0.4619,0.0498,Wwb,g,wet weight at birth,0.4651
+0.99,7.6,10.7,0.4075,Wwx,g,wet weight at weaning,11.02
+0.99,8.2,11.64,0.419,Wwp,g,wet weight at puberty,12.08
+0.99,8.4,11.64,0.3852,Wwi,g,ultimate wet weight,12.08
+0.99,0.04932,0.1484,02.01,Ri,#/d,maximum reprod rate,0.1602
+0.98,21,21.1,0.004748,tg,d,gestation time,21.1
+0.98,23,19.69,0.1441,tx,d,time since birth at weaning,19.03
+0.98,198,115.5,0.4165,tp,d,time since birth at puberty,105
+0.98,1168,1014,0.1315,am,d,life span,978.5
+0.98,6,6.526,0.08767,Li,cm,ultimate total length,6.659
+0.98,0.44,0.4587,0.04246,Wwb,g,wet weight at birth,0.4651
+0.98,7.6,10.37,0.3648,Wwx,g,wet weight at weaning,11.02
+0.98,8.2,11.21,0.3668,Wwp,g,wet weight at puberty,12.08
+0.98,8.4,11.21,0.3342,Wwi,g,ultimate wet weight,12.08
+0.98,0.04932,0.1368,1.774,Ri,#/d,maximum reprod rate,0.1602
+0.97,21,21.1,0.004748,tg,d,gestation time,21.1
+0.97,23,20.04,0.1289,tx,d,time since birth at weaning,19.03
+0.97,198,121.6,0.3857,tp,d,time since birth at puberty,105
+0.97,1168,1033,0.1156,am,d,life span,978.5
+0.97,6,6.459,0.07657,Li,cm,ultimate total length,6.659
+0.97,0.44,0.4555,0.03513,Wwb,g,wet weight at birth,0.4651
+0.97,7.6,10.05,0.3226,Wwx,g,wet weight at weaning,11.02
+0.97,8.2,10.79,0.316,Wwp,g,wet weight at puberty,12.08
+0.97,8.4,10.79,0.2847,Wwi,g,ultimate wet weight,12.08
+0.97,0.04932,0.1253,1.541,Ri,#/d,maximum reprod rate,0.1602
+0.9,21,21.1,0.004748,tg,d,gestation time,21.1
+0.9,23,23.01,0.0003154,tx,d,time since birth at weaning,19.03
+0.9,198,196.4,0.008047,tp,d,time since birth at puberty,105
+0.9,1168,1174,0.005251,am,d,life span,978.5
+0.9,6,5.993,0.00112,Li,cm,ultimate total length,6.659
+0.9,0.44,0.4329,0.01621,Wwb,g,wet weight at birth,0.4651
+0.9,7.6,7.917,0.04165,Wwx,g,wet weight at weaning,11.02
+0.9,8.2,8.192,0.0009408,Wwp,g,wet weight at puberty,12.08
+0.9,8.4,8.192,0.02473,Wwi,g,ultimate wet weight,12.08
+0.9,0.04932,0.04883,0.00986,Ri,#/d,maximum reprod rate,0.1602
+0.96,21,21.1,0.004748,tg,d,gestation time,21.1
+0.96,23,20.4,0.113,tx,d,time since birth at weaning,19.03
+0.96,198,128.4,0.3514,tp,d,time since birth at puberty,105
+0.96,1168,1052,0.09937,am,d,life span,978.5
+0.96,6,6.393,0.06547,Li,cm,ultimate total length,6.659
+0.96,0.44,0.4522,0.02779,Wwb,g,wet weight at birth,0.4651
+0.96,7.6,9.734,0.2808,Wwx,g,wet weight at weaning,11.02
+0.96,8.2,10.39,0.2667,Wwp,g,wet weight at puberty,12.08
+0.96,8.4,10.39,0.2366,Wwi,g,ultimate wet weight,12.08
+0.96,0.04932,0.114,1.311,Ri,#/d,maximum reprod rate,0.1602
+0.95,21,21.1,0.004748,tg,d,gestation time,21.1
+0.95,23,20.78,0.09634,tx,d,time since birth at weaning,19.03
+0.95,198,136,0.3129,tp,d,time since birth at puberty,105
+0.95,1168,1071,0.08281,am,d,life span,978.5
+0.95,6,6.326,0.05437,Li,cm,ultimate total length,6.659
+0.95,0.44,0.449,0.02046,Wwb,g,wet weight at birth,0.4651
+0.95,7.6,9.421,0.2396,Wwx,g,wet weight at weaning,11.02
+0.95,8.2,9.994,0.2188,Wwp,g,wet weight at puberty,12.08
+0.95,8.4,9.994,0.1898,Wwi,g,ultimate wet weight,12.08
+0.95,0.04932,0.1028,1.084,Ri,#/d,maximum reprod rate,0.1602
+0.94,21,21.1,0.004748,tg,d,gestation time,21.1
+0.94,23,21.19,0.07887,tx,d,time since birth at weaning,19.03
+0.94,198,144.7,0.2693,tp,d,time since birth at puberty,105
+0.94,1168,1091,0.06591,am,d,life span,978.5
+0.94,6,6.26,0.04328,Li,cm,ultimate total length,6.659
+0.94,0.44,0.4458,0.01313,Wwb,g,wet weight at birth,0.4651
+0.94,7.6,9.111,0.1989,Wwx,g,wet weight at weaning,11.02
+0.94,8.2,9.612,0.1722,Wwp,g,wet weight at puberty,12.08
+0.94,8.4,9.612,0.1443,Wwi,g,ultimate wet weight,12.08
+0.94,0.04932,0.09169,0.8593,Ri,#/d,maximum reprod rate,0.1602
+0.93,21,21.1,0.004748,tg,d,gestation time,21.1
+0.93,23,21.61,0.06053,tx,d,time since birth at weaning,19.03
+0.93,198,154.6,0.2193,tp,d,time since birth at puberty,105
+0.93,1168,1111,0.04865,am,d,life span,978.5
+0.93,6,6.193,0.03218,Li,cm,ultimate total length,6.659
+0.93,0.44,0.4425,0.005793,Wwb,g,wet weight at birth,0.4651
+0.93,7.6,8.806,0.1587,Wwx,g,wet weight at weaning,11.02
+0.93,8.2,9.241,0.127,Wwp,g,wet weight at puberty,12.08
+0.93,8.4,9.241,0.1002,Wwi,g,ultimate wet weight,12.08
+0.93,0.04932,0.08076,0.6377,Ri,#/d,maximum reprod rate,0.1602
+0.92,21,21.1,0.004748,tg,d,gestation time,21.1
+0.92,23,22.05,0.04126,tx,d,time since birth at weaning,19.03
+0.92,198,166.1,0.1611,tp,d,time since birth at puberty,105
+0.92,1168,1132,0.03105,am,d,life span,978.5
+0.92,6,6.126,0.02108,Li,cm,ultimate total length,6.659
+0.92,0.44,0.4393,0.001541,Wwb,g,wet weight at birth,0.4651
+0.92,7.6,8.505,0.1191,Wwx,g,wet weight at weaning,11.02
+0.92,8.2,8.881,0.08306,Wwp,g,wet weight at puberty,12.08
+0.92,8.4,8.881,0.05728,Wwi,g,ultimate wet weight,12.08
+0.92,0.04932,0.06998,0.419,Ri,#/d,maximum reprod rate,0.1602
+0.91,21,21.1,0.004748,tg,d,gestation time,21.1
+0.91,23,22.52,0.02101,tx,d,time since birth at weaning,19.03
+0.91,198,179.8,0.09205,tp,d,time since birth at puberty,105
+0.91,1168,1153,0.01308,am,d,life span,978.5
+0.91,6,06.06,0.009979,Li,cm,ultimate total length,6.659
+0.91,0.44,0.4361,0.008875,Wwb,g,wet weight at birth,0.4651
+0.91,7.6,8.208,0.08006,Wwx,g,wet weight at weaning,11.02
+0.91,8.2,8.532,0.04043,Wwp,g,wet weight at puberty,12.08
+0.91,8.4,8.532,0.01566,Wwi,g,ultimate wet weight,12.08
+0.91,0.04932,0.05933,0.2031,Ri,#/d,maximum reprod rate,0.1602
+0.88,21,21.1,0.004748,tg,d,gestation time,21.1
+0.88,23,24.07,0.04647,tx,d,time since birth at weaning,19.03
+0.88,198,245.4,0.2396,tp,d,time since birth at puberty,105
+0.88,1168,1218,0.04301,am,d,life span,978.5
+0.88,6,5.86,0.02332,Li,cm,ultimate total length,6.659
+0.88,0.44,0.4264,0.03088,Wwb,g,wet weight at birth,0.4651
+0.88,7.6,7.347,0.03324,Wwx,g,wet weight at weaning,11.02
+0.88,8.2,7.544,0.08,Wwp,g,wet weight at puberty,12.08
+0.88,8.4,7.544,0.1019,Wwi,g,ultimate wet weight,12.08
+0.88,0.04932,0.02824,0.4273,Ri,#/d,maximum reprod rate,0.1602
+0.89,21,21.1,0.004748,tg,d,gestation time,21.1
+0.89,23,23.52,0.02278,tx,d,time since birth at weaning,19.03
+0.89,198,217.4,0.09798,tp,d,time since birth at puberty,105
+0.89,1168,1196,0.02395,am,d,life span,978.5
+0.89,6,5.927,0.01222,Li,cm,ultimate total length,6.659
+0.89,0.44,0.4296,0.02354,Wwb,g,wet weight at birth,0.4651
+0.89,7.6,7.629,0.003878,Wwx,g,wet weight at weaning,11.02
+0.89,8.2,7.863,0.04108,Wwp,g,wet weight at puberty,12.08
+0.89,8.4,7.863,0.06391,Wwi,g,ultimate wet weight,12.08
+0.89,0.04932,0.03846,0.22,Ri,#/d,maximum reprod rate,0.1602
+0.87,21,21.1,0.004748,tg,d,gestation time,21.1
+0.87,23,24.64,0.07148,tx,d,time since birth at weaning,19.03
+0.87,198,286.8,0.4484,tp,d,time since birth at puberty,105
+0.87,1168,1241,0.06246,am,d,life span,978.5
+0.87,6,5.794,0.03442,Li,cm,ultimate total length,6.659
+0.87,0.44,0.4232,0.03821,Wwb,g,wet weight at birth,0.4651
+0.87,7.6,7.07,0.06967,Wwx,g,wet weight at weaning,11.02
+0.87,8.2,7.235,0.1177,Wwp,g,wet weight at puberty,12.08
+0.87,8.4,7.235,0.1387,Wwi,g,ultimate wet weight,12.08
+0.87,0.04932,0.01816,0.6318,Ri,#/d,maximum reprod rate,0.1602
+0.86,21,21.1,0.004748,tg,d,gestation time,21.1
+0.86,23,25.25,0.09791,tx,d,time since birth at weaning,19.03
+0.86,198,363.5,0.8357,tp,d,time since birth at puberty,105
+0.86,1168,1264,0.08227,am,d,life span,978.5
+0.86,6,5.727,0.04551,Li,cm,ultimate total length,6.659
+0.86,0.44,0.42,0.04554,Wwb,g,wet weight at birth,0.4651
+0.86,7.6,6.799,0.1054,Wwx,g,wet weight at weaning,11.02
+0.86,8.2,6.935,0.1543,Wwp,g,wet weight at puberty,12.08
+0.86,8.4,6.935,0.1744,Wwi,g,ultimate wet weight,12.08
+0.86,0.04932,0.008214,0.8334,Ri,#/d,maximum reprod rate,0.1602

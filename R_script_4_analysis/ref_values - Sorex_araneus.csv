@@ -1,0 +1,11 @@
+symbol,units,description,min,max
+tg,d,gestation time,19,21
+tx,d,time since birth at weaning,25,30
+tp,d,time since birth at puberty,NA,NA
+am,d,life span,730,1169
+Li,cm,ultimate total length,NA,NA
+Wwb,g,wet weight at birth,0.44,0.44
+Wwx,g,wet weight at weaning,8.5,8.5
+Wwp,g,wet weight at puberty,NA,NA
+Wwi,g,ultimate wet weight,5,14
+Ri,#/d,maximum reprod rate,0.031,0.031

@@ -1,0 +1,412 @@
+---
+title: "analyse_variation"
+author: "Virgile Baudrot & colleagues"
+date: "2025-10-13"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  fig.width=10)
+```
+
+# Setup Library & Data
+
+```{r}
+library(readr)
+library(ggplot2)
+library(dplyr)
+library(gridExtra)
+library(tidyr)
+library(broom)
+```
+
+```{r cars}
+ref_values_files <- list.files(path = ".", pattern = "^ref.*\\.csv$", full.names = FALSE)
+variation_f_files <- list.files(path = ".", pattern = "^var.*\\.csv$", full.names = FALSE)
+
+ls_ref <- lapply(ref_values_files, function(p){readr::read_csv(p)})
+names(ls_ref) <- lapply(ref_values_files, function(n){sub(".* - (.*?)\\..*", "\\1", n)})
+
+ls_var <- lapply(variation_f_files, function(p){
+  readr::read_csv(p, col_types = cols(prd = col_double(), data = col_double()))
+})
+names(ls_var) <- lapply(variation_f_files, function(n){sub(".* - (.*?)\\..*", "\\1", n)})
+
+names(ls_var) == names(ls_ref)
+```
+
+```{r, echo=FALSE, include=FALSE}
+best_d <- function(d){
+  # 1) Ajuster les 2 modèles par groupe et empiler les résultats
+  models_by_group <- d %>%
+    group_by(description_symbol) %>%
+    group_modify(function(df, keys) {
+      fit_lin  <- lm(percentage_reduction_effect ~ 0 + percentage_reduction, data = df)
+      fit_poly <- lm(percentage_reduction_effect ~ 0 + I(percentage_reduction^2), data = df)
+
+    # Résumés globaux
+    g_lin  <- glance(fit_lin)
+    g_poly <- glance(fit_poly)
+
+    # Coeffs
+    t_lin  <- tidy(fit_lin)
+    t_poly <- tidy(fit_poly)
+
+    # Préparer une ligne par modèle
+    bind_rows(
+      tibble(
+        model   = "linear",
+        R2      = g_lin$r.squared,
+        adj_R2  = g_lin$adj.r.squared,
+        AIC     = g_lin$AIC,
+        BIC     = g_lin$BIC,
+        Slope_lin  = t_lin$estimate[t_lin$term == "percentage_reduction"],
+        p_lin      = t_lin$p.value[t_lin$term == "percentage_reduction"],
+        Slope_quad = NA_real_,
+        p_quad     = NA_real_
+      ),
+      tibble(
+        model   = "poly2",
+        R2      = g_poly$r.squared,
+        adj_R2  = g_poly$adj.r.squared,
+        AIC     = g_poly$AIC,
+        BIC     = g_poly$BIC,
+        Slope_lin  = t_poly$estimate[t_poly$term == "percentage_reduction"],
+        p_lin      = t_poly$p.value[t_poly$term == "percentage_reduction"],
+        Slope_quad = t_poly$estimate[t_poly$term == "I(percentage_reduction^2)"],
+        p_quad     = t_poly$p.value[t_poly$term == "I(percentage_reduction^2)"]
+      )
+    )
+  }) %>%
+  ungroup()
+
+  # 2) Tableau récapitulatif de TOUS les modèles (un par ligne)
+  all_models <- models_by_group %>%
+    select(description_symbol, model, R2, adj_R2, AIC, BIC,
+           Slope_lin, p_lin, Slope_quad, p_quad)
+  
+  # 3) Sélection du "meilleur" modèle par groupe (selon R2 — ou adj_R2 si tu préfères)
+  best_by_R2 <- all_models %>%
+    group_by(description_symbol) %>%
+    slice_max(R2, n = 1, with_ties = FALSE) %>%
+    ungroup()
+  
+  # (Optionnel) si tu préfères pénaliser la complexité, prends l'ajusté :
+  best_by_adjR2 <- all_models %>%
+    group_by(description_symbol) %>%
+    slice_max(adj_R2, n = 1, with_ties = FALSE) %>%
+    ungroup()
+  
+  return(list(best_by_R2=best_by_R2, best_by_adjR2=best_by_adjR2))
+}
+```
+
+
+
+
+```{r, echo=FALSE, include=FALSE}
+plts <- function(name, varNames){
+  d0 = ls_ref[[name]]
+  d = ls_var[[name]] |>
+    dplyr::mutate(
+      description_symbol=paste0(description, ", ", symbol),
+      percentage_reduction = (1-f)*100,
+      percentage_reduction_effect = (1-prd/prd_f1)*100
+    ) |>
+    dplyr::full_join(d0)
+  
+  
+  d$description_symbol = factor(d$description_symbol, levels = varNames)
+  
+  w_lab_val = 25
+  
+  g1 = ggplot(data=d) + 
+    theme_minimal() +
+    labs(
+      x="Percentage of food reduction",
+      y = "Prediction (black points)\n Data min-max (green band)") +
+    scale_y_continuous(limits=c(0,NA)) +
+    geom_ribbon(aes(x=percentage_reduction, ymin=min, ymax=max), alpha=0.5, fill="#C8E897") +
+    geom_line(aes(x=percentage_reduction,y=data), color = "grey30") +
+    geom_point(aes(x=percentage_reduction, y=prd)) +
+    facet_wrap(~description_symbol, labeller = label_wrap_gen(width=w_lab_val), nrow=2, scale="free")
+  
+  # LINEAR MODEL
+  d_lm <- best_d(d)$best_by_R2
+  x_lab = max(d$percentage_reduction)/2
+  g2 = ggplot(data=d, aes(x=percentage_reduction, y=percentage_reduction_effect)) + 
+    theme_minimal() +
+    labs(x="Percentage of food reduction",
+         y = "Percentage of reduction in variable") +
+    #geom_abline(slope=1,intercept=0,color="grey30") +
+    #geom_abline(slope=-1,intercept=0,color="grey30") +
+    geom_point() +
+    geom_smooth(
+      method = "lm", formula = y ~ 0 + x + I(x^2),
+      se = TRUE, color = "grey20", fill = "lightgray") +
+    geom_smooth(
+      method = "lm", formula = y ~ 0 + x, 
+      se = TRUE, color = "#aa1122", fill = "lightgray") +
+    geom_label(data = d_lm,
+      aes(x = x_lab, y = Slope_lin*3, 
+          label = paste("elasticity\n(slope) =", round(Slope_lin,3))), 
+       size = 3, color="#aa1122"
+    ) + 
+    facet_wrap(~description_symbol, labeller = label_wrap_gen(width=w_lab_val), nrow=2, scale="free")
+
+  return(list(g1, g2))
+}
+
+```
+
+# Perdix perdix
+
+```{r}
+name = "Perdix_perdix"
+unique(ls_var[[name]]$description)
+unique(ls_var[[name]]$symbol)
+varNames = list(
+'1'="age at birth, ab",
+'2'="time since birth at fledging, tx",
+'3'="time since birth at puberty, tp",
+'4'="time since birth at first reproduction, tR",
+'5'="life span, am",
+'6'="initial wet weight, Ww0",
+'7'="wet weight at birth, Wwb",
+'8'="ultimate wet weight, Wwi",
+'9'="ultimate wet weight for males, Wwim",
+'10'="maximum reprod rate, Ri" 
+)
+
+ls_p = plts(name, varNames)
+ls_p[[1]]
+# gridExtra::grid.arrange(g1,g2)
+```
+
+```{r}
+ls_p[[2]]
+```
+
+# Motacilla_flava
+
+
+```{r}
+name = "Motacilla_flava"
+unique(ls_var[[name]]$description)
+unique(ls_var[[name]]$symbol)
+varNames = list(
+'1'="age at birth, ab",
+'2'="time since birth at fledging, tx",
+'3'="time since birth at puberty, tp",
+'4'="time since birth at 1st brood, tR",
+'5'="life span, am",
+'6'="wet weight at birth, Wwb",
+'7'="ultimate wet weight, Wwi",
+'8'="maximum reprod rate, Ri" 
+)
+
+ls_p = plts(name, varNames)
+ls_p[[1]]
+# gridExtra::grid.arrange(g1,g2)
+```
+
+
+```{r}
+ls_p[[2]]
+```
+
+# Alauda arvensis 
+
+```{r}
+name = "Alauda_arvensis"
+unique(ls_var[[name]]$description)
+unique(ls_var[[name]]$symbol)
+varNames = list(
+'1'="age at birth, ab",
+'2'="time since birth at fledging, tx",
+'3'="time since birth at puberty, tp",
+'4'="time since birth at 1st brood, tR",
+'5'="life span, am",
+'6'="wet weight at birth, Wwb",
+'7'="ultimate wet weight, Wwi",
+'8'="maximum reprod rate, Ri" 
+)
+
+ls_p = plts(name, varNames)
+ls_p[[1]]
+# gridExtra::grid.arrange(g1,g2)
+```
+
+```{r}
+ls_p[[2]]
+```
+
+# Turdus_philomelos
+
+```{r}
+name = "Turdus_philomelos"
+unique(ls_var[[name]]$description)
+unique(ls_var[[name]]$symbol)
+varNames = list(
+'1'="age at birth, ab",
+'2'="time since birth at fledging, tx",
+'3'="time since birth at puberty, tp",
+'4'="time since birth at 1st brood, tR",
+'5'="life span, am",
+'6'="wet weight at birth, Wwb",
+'7'="ultimate wet weight, Wwi",
+'8'="maximum reprod rate, Ri" 
+)
+
+ls_p = plts(name, varNames)
+ls_p[[1]]
+# gridExtra::grid.arrange(g1,g2)
+```
+
+```{r}
+ls_p[[2]]
+```
+
+# Sorex_araneus
+
+```{r}
+name = "Sorex_araneus"
+unique(ls_var[[name]]$description)
+unique(ls_var[[name]]$symbol)
+varNames = list(
+'1'="gestation time, tg",
+'2'="time since birth at weaning, tx",
+'3'="time since birth at puberty, tp",
+'5'="life span, am",
+'6'="ultimate total length, Li",
+'7'="wet weight at birth, Wwb",
+'8'="wet weight at weaning, Wwx",
+'9'="wet weight at puberty, Wwp",
+'10'="ultimate wet weight, Wwi",
+'11'="maximum reprod rate, Ri" 
+)
+
+ls_p = plts(name, varNames)
+ls_p[[1]]
+# gridExtra::grid.arrange(g1,g2)
+```
+
+```{r}
+ls_p[[2]]
+```
+
+# Crocidura_russula
+
+```{r}
+name = "Crocidura_russula"
+unique(ls_var[[name]]$description)
+unique(ls_var[[name]]$symbol)
+varNames = list(
+'1'="gestation time, tg",
+'2'="time since birth at weaning, tx",
+'3'="time since birth at puberty, tp",
+'5'="life span, am",
+'6'="wet weight at birth, Wwb",
+'7'="wet weight at weaning, Wwx",
+'8'="ultimate wet weight, Wwi",
+'9'="maximum reprod rate, Ri" 
+)
+
+ls_p = plts(name, varNames)
+ls_p[[1]]
+# gridExtra::grid.arrange(g1,g2)
+```
+
+```{r}
+ls_p[[2]]
+```
+
+# Ichthyosaura_alpestris
+
+```{r}
+name = "Ichthyosaura_alpestris"
+unique(ls_var[[name]]$description)
+unique(ls_var[[name]]$symbol)
+varNames = list(
+'1'="life span, am",
+'2'="SVL at metam for females, Lj",
+'3'="SVL at puberty for females, Lp",
+'4'="SVL at puberty for males, Lpm",
+'5'="ultimate SVL for females, Li",
+'6'="ultimate SVL for males, Lim",
+'7'="wet weight at birth, Wwb",
+'8'="ultimate wet weight for females, Wwi",
+'9'="ultimate wet weight for males, Wwim",
+'10'="maximum reprod rate, Ri" 
+)
+
+ls_p = plts(name, varNames)
+ls_p[[1]]
+# gridExtra::grid.arrange(g1,g2)
+```
+
+```{r}
+ls_p[[2]]
+```
+
+# Rana_temporaria
+
+```{r}
+name = "Rana_temporaria"
+unique(ls_var[[name]]$description)
+unique(ls_var[[name]]$symbol)
+varNames = list(
+'1'="age at birth, ab",
+'2'="time since birth at metam, tj",
+'3'="time since metam at puberty, tp",
+'4'="life span, am",
+'5'="body length at metam, Lj",
+'6'="ultimate body length, Li",
+'7'="wet weight at birth, Wwb",
+'8'="ultimate wet weight, Wwi",
+'9'="maximum reprod rate, Ri" 
+)
+
+ls_p = plts(name, varNames)
+ls_p[[1]]
+# gridExtra::grid.arrange(g1,g2)
+```
+
+```{r}
+ls_p[[2]]
+```
+
+
+# Podarcis_muralis
+
+```{r, fig.width=12}
+name = "Podarcis_muralis"
+unique(ls_var[[name]]$description)
+unique(ls_var[[name]]$symbol)
+varNames = list(
+'1'="time since birth at puberty, tp",
+'2'="life span, am",
+'3'="SVL at hatching, Lb",
+'4'="SVL at puberty for females, Lp",
+'5'="SVL at puberty for males, Lpm",
+'6'="ultimate SVL for females, Li",
+'7'="ultimate SVL for males, Lim",
+'8'="wet weight of eggs, Ww0", 
+'9'="wet weight of hatchlings, Wwb",
+'10'="ultimate wet weight, Wwi",
+'11'="ultimate wet weight for males, Wwim",
+'12'="maximum reprod rate, Ri" 
+)
+
+ls_p = plts(name, varNames)
+ls_p[[1]]
+# gridExtra::grid.arrange(g1,g2)
+```
+
+```{r}
+ls_p[[2]]
+```

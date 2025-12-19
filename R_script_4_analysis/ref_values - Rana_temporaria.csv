@@ -1,0 +1,10 @@
+symbol,units,description,min,max
+ab,d,age at birth,30,40
+tj,d,time since birth at metam,NA,NA
+tp,d,time since metam at puberty,730,2191
+am,d,life span,5113,9862
+Lj,cm,body length at metam,NA,NA
+Li,cm,ultimate body length,6,11
+Wwb,g,wet weight at birth,NA,NA
+Wwi,g,ultimate wet weight,22.7,47.6
+Ri,#/d,maximum reprod rate,0.72,10.95

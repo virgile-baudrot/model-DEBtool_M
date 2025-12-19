@@ -1,0 +1,161 @@
+f,data,prd,RE,symbol,units,description,prd_f1
+1,7300,7301,0.0001639,am,d,life span,7301
+1,1.83,1.83,0.0001182,Lj,cm,SVL at metam for females,1.83
+1,4.9,4.564,0.06854,Lp,cm,SVL at puberty for females,4.564
+1,4.4,4.398,0.0003588,Lpm,cm,SVL at puberty for males,4.398
+1,5.84,6.086,0.04204,Li,cm,ultimate SVL for females,6.086
+1,5.05,5.241,0.03788,Lim,cm,ultimate SVL for males,5.241
+1,0.0035,0.00336,0.04009,Wwb,g,wet weight at birth,0.00336
+1,3.16,3.34,0.05692,Wwi,g,ultimate wet weight for females,3.34
+1,2.04,2.001,0.01888,Wwim,g,ultimate wet weight for males,2.001
+1,0.8219,0.7814,0.04927,Ri,#/d,maximum reprod rate,0.7814
+0.99,7300,7301,0.0001815,am,d,life span,7301
+0.99,1.83,1.829,0.000479,Lj,cm,SVL at metam for females,1.83
+0.99,4.9,4.554,0.07059,Lp,cm,SVL at puberty for females,4.564
+0.99,4.4,4.386,0.003218,Lpm,cm,SVL at puberty for males,4.398
+0.99,5.84,6.025,0.03162,Li,cm,ultimate SVL for females,6.086
+0.99,5.05,5.189,0.0275,Lim,cm,ultimate SVL for males,5.241
+0.99,0.0035,0.003344,0.04449,Wwb,g,wet weight at birth,0.00336
+0.99,3.16,3.226,0.02094,Wwi,g,ultimate wet weight for females,3.34
+0.99,2.04,1.934,0.05193,Wwim,g,ultimate wet weight for males,2.001
+0.99,0.8219,0.7517,0.08539,Ri,#/d,maximum reprod rate,0.7814
+0.98,7300,7301,0.000199,am,d,life span,7301
+0.98,1.83,1.828,0.001089,Lj,cm,SVL at metam for females,1.83
+0.98,4.9,4.544,0.0727,Lp,cm,SVL at puberty for females,4.564
+0.98,4.4,4.373,0.006154,Lpm,cm,SVL at puberty for males,4.398
+0.98,5.84,5.964,0.0212,Li,cm,ultimate SVL for females,6.086
+0.98,5.05,5.136,0.01713,Lim,cm,ultimate SVL for males,5.241
+0.98,0.0035,0.003329,0.04888,Wwb,g,wet weight at birth,0.00336
+0.98,3.16,3.115,0.01413,Wwi,g,ultimate wet weight for females,3.34
+0.98,2.04,1.868,0.08416,Wwim,g,ultimate wet weight for males,2.001
+0.98,0.8219,0.7225,0.1209,Ri,#/d,maximum reprod rate,0.7814
+0.97,7300,7302,0.0002162,am,d,life span,7301
+0.97,1.83,1.827,0.001712,Lj,cm,SVL at metam for females,1.83
+0.97,4.9,4.533,0.07486,Lp,cm,SVL at puberty for females,4.564
+0.97,4.4,4.36,0.009169,Lpm,cm,SVL at puberty for males,4.398
+0.97,5.84,5.903,0.01078,Li,cm,ultimate SVL for females,6.086
+0.97,05.05,5.084,0.006746,Lim,cm,ultimate SVL for males,5.241
+0.97,0.0035,0.003314,0.05328,Wwb,g,wet weight at birth,0.00336
+0.97,3.16,3.007,0.04832,Wwi,g,ultimate wet weight for females,3.34
+0.97,02.04,1.804,0.1156,Wwim,g,ultimate wet weight for males,2.001
+0.97,0.8219,0.6938,0.1559,Ri,#/d,maximum reprod rate,0.7814
+0.96,7300,7302,0.000233,am,d,life span,7301
+0.96,1.83,1.826,0.002348,Lj,cm,SVL at metam for females,1.83
+0.96,4.9,4.522,0.07707,Lp,cm,SVL at puberty for females,4.564
+0.96,4.4,4.346,0.01227,Lpm,cm,SVL at puberty for males,4.398
+0.96,5.84,5.842,0.0003581,Li,cm,ultimate SVL for females,6.086
+0.96,5.05,5.032,0.003633,Lim,cm,ultimate SVL for males,5.241
+0.96,0.0035,0.003298,0.05768,Wwb,g,wet weight at birth,0.00336
+0.96,3.16,2.902,0.08163,Wwi,g,ultimate wet weight for females,3.34
+0.96,2.04,1.742,0.1462,Wwim,g,ultimate wet weight for males,2.001
+0.96,0.8219,0.6656,0.1902,Ri,#/d,maximum reprod rate,0.7814
+0.95,7300,7302,0.0002486,am,d,life span,7301
+0.95,1.83,1.825,0.002999,Lj,cm,SVL at metam for females,1.83
+0.95,4.9,4.511,0.07934,Lp,cm,SVL at puberty for females,4.564
+0.95,4.4,4.332,0.01545,Lpm,cm,SVL at puberty for males,4.398
+0.95,5.84,5.781,0.01006,Li,cm,ultimate SVL for females,6.086
+0.95,05.05,4.979,0.01401,Lim,cm,ultimate SVL for males,5.241
+0.95,0.0035,0.003283,0.06208,Wwb,g,wet weight at birth,0.00336
+0.95,3.16,2.8,0.1141,Wwi,g,ultimate wet weight for females,3.34
+0.95,02.04,1.681,0.1761,Wwim,g,ultimate wet weight for males,2.001
+0.95,0.8219,0.6378,0.224,Ri,#/d,maximum reprod rate,0.7814
+0.94,7300,7302,0.0002655,am,d,life span,7301
+0.94,1.83,1.823,0.003664,Lj,cm,SVL at metam for females,1.83
+0.94,4.9,4.5,0.08167,Lp,cm,SVL at puberty for females,4.564
+0.94,4.4,4.318,0.01873,Lpm,cm,SVL at puberty for males,4.398
+0.94,5.84,5.72,0.02048,Li,cm,ultimate SVL for females,6.086
+0.94,5.05,4.927,0.02439,Lim,cm,ultimate SVL for males,5.241
+0.94,0.0035,0.003267,0.06649,Wwb,g,wet weight at birth,0.00336
+0.94,3.16,2.7,0.1457,Wwi,g,ultimate wet weight for females,3.34
+0.94,2.04,1.621,0.2052,Wwim,g,ultimate wet weight for males,2.001
+0.94,0.8219,0.6106,0.2571,Ri,#/d,maximum reprod rate,0.7814
+0.93,7300,7302,0.0002813,am,d,life span,7301
+0.93,1.83,1.822,0.004344,Lj,cm,SVL at metam for females,1.83
+0.93,4.9,4.488,0.08406,Lp,cm,SVL at puberty for females,4.564
+0.93,4.4,4.303,0.0221,Lpm,cm,SVL at puberty for males,4.398
+0.93,5.84,5.66,0.0309,Li,cm,ultimate SVL for females,6.086
+0.93,05.05,4.874,0.03477,Lim,cm,ultimate SVL for males,5.241
+0.93,0.0035,0.003252,0.07089,Wwb,g,wet weight at birth,0.00336
+0.93,3.16,2.602,0.1765,Wwi,g,ultimate wet weight for females,3.34
+0.93,2.04,1.564,0.2335,Wwim,g,ultimate wet weight for males,2.001
+0.93,0.8219,0.5838,0.2897,Ri,#/d,maximum reprod rate,0.7814
+0.92,7300,7302,0.000297,am,d,life span,7301
+0.92,1.83,1.821,0.005039,Lj,cm,SVL at metam for females,1.83
+0.92,4.9,4.476,0.08652,Lp,cm,SVL at puberty for females,4.564
+0.92,4.4,4.287,0.02558,Lpm,cm,SVL at puberty for males,4.398
+0.92,5.84,5.599,0.04132,Li,cm,ultimate SVL for females,6.086
+0.92,5.05,4.822,0.04515,Lim,cm,ultimate SVL for males,5.241
+0.92,0.0035,0.003236,0.07529,Wwb,g,wet weight at birth,0.00336
+0.92,3.16,2.508,0.2064,Wwi,g,ultimate wet weight for females,3.34
+0.92,2.04,1.507,0.2611,Wwim,g,ultimate wet weight for males,2.001
+0.92,0.8219,0.5575,0.3217,Ri,#/d,maximum reprod rate,0.7814
+0.7,7300,7304,0.0005633,am,d,life span,7301
+0.7,1.83,1.783,0.02567,Lj,cm,SVL at metam for females,1.83
+0.7,4.9,4.087,0.1659,Lp,cm,SVL at puberty for females,4.564
+0.7,4.4,NaN,NaN,Lpm,cm,SVL at puberty for males,4.398
+0.7,5.84,4.26,0.2706,Li,cm,ultimate SVL for females,6.086
+0.7,5.05,3.669,0.2735,Lim,cm,ultimate SVL for males,5.241
+0.7,0.0035,0.002897,0.1724,Wwb,g,wet weight at birth,0.00336
+0.7,3.16,0.9919,0.6861,Wwi,g,ultimate wet weight for females,3.34
+0.7,2.04,0.602,0.7049,Wwim,g,ultimate wet weight for males,2.001
+0.7,0.8219,0.09187,0.8882,Ri,#/d,maximum reprod rate,0.7814
+0.91,7300,7302,0.0003121,am,d,life span,7301
+0.91,1.83,1.819,0.005751,Lj,cm,SVL at metam for females,1.83
+0.91,4.9,4.464,0.08904,Lp,cm,SVL at puberty for females,4.564
+0.91,4.4,4.272,0.02916,Lpm,cm,SVL at puberty for males,4.398
+0.91,5.84,5.538,0.05174,Li,cm,ultimate SVL for females,6.086
+0.91,5.05,4.77,0.05553,Lim,cm,ultimate SVL for males,5.241
+0.91,0.0035,0.003221,0.07969,Wwb,g,wet weight at birth,0.00336
+0.91,3.16,2.416,0.2356,Wwi,g,ultimate wet weight for females,3.34
+0.91,2.04,1.453,0.288,Wwim,g,ultimate wet weight for males,2.001
+0.91,0.8219,0.5316,0.3532,Ri,#/d,maximum reprod rate,0.7814
+0.90,7300,7302,0.0003268,am,d,life span,7301
+0.90,1.83,1.818,0.006478,Lj,cm,SVL at metam for females,1.83
+0.90,4.9,4.451,0.09163,Lp,cm,SVL at puberty for females,4.564
+0.90,4.4,4.255,0.03285,Lpm,cm,SVL at puberty for males,4.398
+0.90,5.84,5.477,0.06216,Li,cm,ultimate SVL for females,6.086
+0.90,5.05,4.717,0.06591,Lim,cm,ultimate SVL for males,5.241
+0.90,0.0035,0.003206,0.0841,Wwb,g,wet weight at birth,0.00336
+0.90,3.16,2.326,0.264,Wwi,g,ultimate wet weight for females,3.34
+0.90,2.04,1.399,0.3141,Wwim,g,ultimate wet weight for males,2.001
+0.90,0.8219,0.5063,0.3841,Ri,#/d,maximum reprod rate,0.7814
+0.85,7300,7303,0.0003884,am,d,life span,7301
+0.85,1.83,1.811,0.01039,Lj,cm,SVL at metam for females,1.83
+0.85,4.9,4.382,0.1058,Lp,cm,SVL at puberty for females,4.564
+0.85,4.4,4.166,0.05325,Lpm,cm,SVL at puberty for males,4.398
+0.85,5.84,5.173,0.1143,Li,cm,ultimate SVL for females,6.086
+0.85,5.05,4.455,0.1178,Lim,cm,ultimate SVL for males,5.241
+0.85,0.0035,0.003129,0.1061,Wwb,g,wet weight at birth,0.00336
+0.85,3.16,1.914,0.3944,Wwi,g,ultimate wet weight for females,3.34
+0.85,2.04,1.153,0.4346,Wwim,g,ultimate wet weight for males,2.001
+0.85,0.8219,0.3863,0.53,Ri,#/d,maximum reprod rate,0.7814
+0.80,7300,7303,0.0004577,am,d,life span,7301
+0.80,1.83,1.803,0.01481,Lj,cm,SVL at metam for females,1.83
+0.80,4.9,4.301,0.1223,Lp,cm,SVL at puberty for females,4.564
+0.80,4.4,4.058,0.0778,Lpm,cm,SVL at puberty for males,4.398
+0.80,5.84,4.868,0.1664,Li,cm,ultimate SVL for females,6.086
+0.80,5.05,4.193,0.1697,Lim,cm,ultimate SVL for males,5.241
+0.80,0.0035,0.003051,0.1282,Wwb,g,wet weight at birth,0.00336
+0.80,3.16,1.557,0.5072,Wwi,g,ultimate wet weight for females,3.34
+0.80,2.04,0.9406,0.5389,Wwim,g,ultimate wet weight for males,2.001
+0.80,0.8219,0.2775,0.6624,Ri,#/d,maximum reprod rate,0.7814
+0.75,7300,7304,0.0005115,am,d,life span,7301
+0.75,1.83,1.794,0.01986,Lj,cm,SVL at metam for females,1.83
+0.75,4.9,4.205,0.1419,Lp,cm,SVL at puberty for females,4.564
+0.75,4.4,3.919,0.1092,Lpm,cm,SVL at puberty for males,4.398
+0.75,5.84,4.564,0.2185,Li,cm,ultimate SVL for females,6.086
+0.75,5.05,3.931,0.2216,Lim,cm,ultimate SVL for males,5.241
+0.75,0.0035,0.002974,0.1503,Wwb,g,wet weight at birth,0.00336
+0.75,3.16,1.252,0.6039,Wwi,g,ultimate wet weight for females,3.34
+0.75,2.04,0.7577,0.6286,Wwim,g,ultimate wet weight for males,2.001
+0.75,0.8219,0.1795,0.7816,Ri,#/d,maximum reprod rate,0.7814
+0.65,7300,7304,0.0006008,am,d,life span,7301
+0.65,1.83,1.771,0.03245,Lj,cm,SVL at metam for females,1.83
+0.65,4.9,3.934,0.1971,Lp,cm,SVL at puberty for females,4.564
+0.65,4.4,NaN,NaN,Lpm,cm,SVL at puberty for males,4.398
+0.65,5.84,3.956,0.3227,Li,cm,ultimate SVL for females,6.086
+0.65,5.05,3.407,0.3254,Lim,cm,ultimate SVL for males,5.241
+0.65,0.0035,0.002819,0.1945,Wwb,g,wet weight at birth,0.00336
+0.65,3.16,0.7737,0.7552,Wwi,g,ultimate wet weight for females,3.34
+0.65,02.04,0.4707,0.7693,Wwim,g,ultimate wet weight for males,2.001
+0.65,0.8219,0.01413,0.9828,Ri,#/d,maximum reprod rate,0.7814

@@ -1,0 +1,13 @@
+symbol,units,description,min,max
+tp,d,time since birth at puberty,NA,NA
+am,d,life span,3650,5844
+Lb,cm,SVL at hatching,NA,NA
+Lp,cm,SVL at puberty for females,NA,NA
+Lpm,cm,SVL at puberty for males,NA,NA
+Li,cm,ultimate SVL for females,4.44,6.55
+Lim,cm,ultimate SVL for males,4.51,6.49
+Ww0,g,wet weight of eggs,0.22,0.45
+Wwb,g,wet weight of hatchlings,NA,NA
+Wwi,g,ultimate wet weight,2.5,5.5
+Wwim,g,ultimate wet weight for males,2.2,6.2
+Ri,#/d,maximum reprod rate,0.01,0.09

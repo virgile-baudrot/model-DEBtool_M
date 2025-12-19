@@ -1,0 +1,65 @@
+f,data,prd,RE,symbol,units,description,prd_f1
+1,11,11.11,0.009668,ab,d,age at birth,11.11
+1,12,12.07,0.006037,tx,d,time since birth at fledging,12.07
+1,36,35.68,0.008803,tp,d,time since birth at puberty,35.68
+1,365,365,0,tR,d,time since birth at 1st brood,365
+1,3686,3698,0.003105,am,d,life span,3698
+1,3.4,3.366,0.009874,Wwb,g,wet weight at birth,3.366
+1,25,25.23,0.0092,Wwi,g,ultimate wet weight,25.23
+1,0.01644,0.01637,0.004459,Ri,#/d,maximum reprod rate,0.01637
+0.99,11,11.12,0.01086,ab,d,age at birth,11.11
+0.99,12,12.27,0.02285,tx,d,time since birth at fledging,12.07
+0.99,36,37.48,0.04122,tp,d,time since birth at puberty,35.68
+0.99,365,365,0,tR,d,time since birth at 1st brood,365
+0.99,3686,3709,0.006181,am,d,life span,3698
+0.99,3.4,3.339,0.01792,Wwb,g,wet weight at birth,3.366
+0.99,25,24.31,0.02761,Wwi,g,ultimate wet weight,25.23
+0.99,0.01644,0.01416,0.1383,Ri,#/d,maximum reprod rate,0.01637
+0.98,11,11.13,0.01208,ab,d,age at birth,11.11
+0.98,12,12.49,0.04054,tx,d,time since birth at fledging,12.07
+0.98,36,39.62,0.1005,tp,d,time since birth at puberty,35.68
+0.98,365,365,0,tR,d,time since birth at 1st brood,365
+0.98,3686,3720,0.009209,am,d,life span,3698
+0.98,3.4,3.312,0.02598,Wwb,g,wet weight at birth,3.366
+0.98,25,23.41,0.0634,Wwi,g,ultimate wet weight,25.23
+0.98,0.01644,0.01199,0.2707,Ri,#/d,maximum reprod rate,0.01637
+0.97,11,11.15,0.01331,ab,d,age at birth,11.11
+0.97,12,12.71,0.0592,tx,d,time since birth at fledging,12.07
+0.97,36,42.22,0.1728,tp,d,time since birth at puberty,35.68
+0.97,365,365,0,tR,d,time since birth at 1st brood,365
+0.97,3686,3731,0.01219,am,d,life span,3698
+0.97,3.4,3.284,0.03403,Wwb,g,wet weight at birth,3.366
+0.97,25,22.54,0.09821,Wwi,g,ultimate wet weight,25.23
+0.97,0.01644,0.009837,0.4016,Ri,#/d,maximum reprod rate,0.01637
+0.96,11,11.16,0.01457,ab,d,age at birth,11.11
+0.96,12,12.95,0.0789,tx,d,time since birth at fledging,12.07
+0.96,36,45.52,0.2644,tp,d,time since birth at puberty,35.68
+0.96,365,365,0,tR,d,time since birth at 1st brood,365
+0.96,3686,3742,0.01513,am,d,life span,3698
+0.96,3.4,3.257,0.04209,Wwb,g,wet weight at birth,3.366
+0.96,25,21.7,0.132,Wwi,g,ultimate wet weight,25.23
+0.96,0.01644,0.00771,0.531,Ri,#/d,maximum reprod rate,0.01637
+0.95,11,11.17,0.01585,ab,d,age at birth,11.11
+0.95,12,13.2,0.09974,tx,d,time since birth at fledging,12.07
+0.95,36,49.96,0.3877,tp,d,time since birth at puberty,35.68
+0.95,365,365,0,tR,d,time since birth at 1st brood,365
+0.95,3686,3753,0.01802,am,d,life span,3698
+0.95,3.4,3.229,0.05016,Wwb,g,wet weight at birth,3.366
+0.95,25,20.88,0.1649,Wwi,g,ultimate wet weight,25.23
+0.95,0.01644,0.005606,0.659,Ri,#/d,maximum reprod rate,0.01637
+0.94,11,11.19,0.01715,ab,d,age at birth,11.11
+0.94,12,13.46,0.1218,tx,d,time since birth at fledging,12.07
+0.94,36,56.62,0.5728,tp,d,time since birth at puberty,35.68
+0.94,365,365,0,tR,d,time since birth at 1st brood,365
+0.94,3686,3763,0.02086,am,d,life span,3698
+0.94,3.4,3.202,0.05822,Wwb,g,wet weight at birth,3.366
+0.94,25,20.08,0.1969,Wwi,g,ultimate wet weight,25.23
+0.94,0.01644,0.003526,0.7855,Ri,#/d,maximum reprod rate,0.01637
+0.93,11,11.2,0.01848,ab,d,age at birth,11.11
+0.93,12,13.74,0.1453,tx,d,time since birth at fledging,12.07
+0.93,36,69.63,0.9342,tp,d,time since birth at puberty,35.68
+0.93,365,365,0,tR,d,time since birth at 1st brood,365
+0.93,3686,3774,0.02365,am,d,life span,3698
+0.93,3.4,3.175,0.06629,Wwb,g,wet weight at birth,3.366
+0.93,25,19.3,0.2279,Wwi,g,ultimate wet weight,25.23
+0.93,0.01644,0.001471,0.9105,Ri,#/d,maximum reprod rate,0.01637

@@ -1,0 +1,11 @@
+symbol,units,description,min,max
+am,d,life span,5478,7305
+Lj,cm,SVL at metam for females,NA,NA
+Lp,cm,SVL at puberty for females,NA,NA
+Lpm,cm,SVL at puberty for males,NA,NA
+Li,cm,ultimate SVL for females,4.91,8.75
+Lim,cm,ultimate SVL for males,4.4,8.75
+Wwb,g,wet weight at birth,NA,NA
+Wwi,g,ultimate wet weight for females,3.9,3.9
+Wwim,g,ultimate wet weight for males,3.9,3.9
+Ri,#/d,maximum reprod rate,0.2,0.52
