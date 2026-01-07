@@ -1,4 +1,4 @@
-function [prdData, info] = predict_Perdix_perdix_discrete(par, data, auxData)
+function [prdData, info] = predict_Perdix_perdix_CT36EFSA(par, data, auxData)
   
   % unpack par, data, auxData
   cPar = parscomp_st(par); vars_pull(par); 
@@ -37,7 +37,7 @@ function [prdData, info] = predict_Perdix_perdix_discrete(par, data, auxData)
   %% Juvenile with f_juvenile
   % fledging
   pars_tx = [g; k; l_T; v_Hb; v_Hx];  % compose parameter vector
-  [tau_x, ~,l_x,~,info] = get_tp(pars_tx, f_juvenile); if info == 0; prdData = []; return; end
+  [tau_x, ~,l_x,~,info] = get_tp(pars_tx, f_nest); if info == 0; prdData = []; return; end
   % puberty 
   pars_tp = [g; k; l_T; v_Hb; v_Hp];  % compose parameter vector
   [tau_p, ~ , l_p, ~, info] = get_tp(pars_tp, f_juvenile); if info == 0; prdData = []; return; end % -, scaled times & lengths at f
@@ -85,8 +85,19 @@ function [prdData, info] = predict_Perdix_perdix_discrete(par, data, auxData)
   % ---------- uni-variate data
   %% Juvenile
   % time-weight
-  tvel = get_tp(pars_tp, f_juvenile, [], tW(:,1)*kT_M);
-  EWw = (L_m * tvel(:,4)).^3 .* (1 + tvel(:,3) * ome);   % g, weight
+  % tvel = get_tp(pars_tp, f_juvenile, [], tW(:,1)*kT_M);
+  % EWw = (L_m * tvel(:,4)).^3 .* (1 + tvel(:,3) * ome);   % g, weight
+
+  % Build piecewise-constant f(t)
+  f = f_nest * ones(size(tW(:,1)));
+  f(tW(:,1) >= tT_x) = f_juvenile;
+  f(tW(:,1) >= tT_p) = f_adult;
+  % Build time–food table expected by get_tp
+  tf = [tW(:,1) * kT_M, f];
+  % Call get_tp once (vectorized in time, piecewise in f)
+  tvel = get_tp(pars_tp, tf, [tau_b 1 l_b], tW(:,1) * kT_M);
+  % Compute wet weight
+  EWw = (L_m .* tvel(:,4)).^3 .* (1 + tvel(:,3) .* ome);
 
   % pack to output
   prdData.tW = EWw;

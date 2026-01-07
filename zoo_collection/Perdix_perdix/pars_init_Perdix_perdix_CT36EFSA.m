@@ -1,4 +1,4 @@
-function [par, metaPar, txtPar] = pars_init_Perdix_perdix_discrete(metaData)
+function [par, metaPar, txtPar] = pars_init_Perdix_perdix_CT36EFSA(metaData)
 
 metaPar.model = 'std'; 
 
@@ -34,10 +34,11 @@ par.z_m = 2.1406;     free.z_m   = 1;   units.z_m = '-';          label.z_m = 'z
 %% Food level parameters
 par.f = 1;              free.f = 0;           units.f = '-';          label.f = 'scaled functional response for 0-var data';
 par.f_embryo = 1;       free.f_embryo = 0;    units.f_embryo = '-';   label.f_embryo = 'scaled functional response during embryo stage';
-par.f_juvenile = 1;   free.f_fledging = 0;  units.f_juvenile = '-'; label.f_juvenile = 'scaled functional response during juvenile stage';
-% par.f_fledging = 0.8;   free.f_fledging = 0;  units.f_juvenile = '-'; label.f_juvenile = 'scaled functional response during fleding stage';
-% par.f_puberty = 0.8;    free.f_puberty = 0;  units.f_juvenile = '-'; label.f_juvenile = 'scaled functional response during puberty stage';
-par.f_adult = 1;      free.f_adult = 0;     units.f_adult = '-';    label.f_adult = 'scaled functional response during adult stage';
+par.f_nest = 1;         free.f_nest = 0;    units.f_embryo = '-';   label.f_embryo = 'scaled functional response during nest (before fledging) stage';
+par.f_juvenile = 1;     free.f_juvenile = 0;  units.f_juvenile = '-'; label.f_juvenile = 'scaled functional response during juvenile stage';
+% par.f_fledging = 0.8; free.f_fledging = 0;  units.f_juvenile = '-'; label.f_juvenile = 'scaled functional response during fleding stage';
+% par.f_puberty = 0.8;  free.f_puberty = 0;  units.f_juvenile = '-'; label.f_juvenile = 'scaled functional response during puberty stage';
+par.f_adult = 1;        free.f_adult = 0;     units.f_adult = '-';    label.f_adult = 'scaled functional response during adult stage';
 
 %% set chemical parameters from Kooy2010 
 [par, units, label, free] = addchem(par, units, label, free, metaData.phylum, metaData.class); 
