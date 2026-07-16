@@ -2,3 +2,10 @@ DEBtool_M is Matlab code that can be used for application of Dynamic Energy Budg
 https://bio.vu.nl/thb/deb/deblab/
 
 add-my-pet.github.io/debtool_m/docs/
+
+
+From a folder
+
+```
+matlab -batch "master_run"
+```

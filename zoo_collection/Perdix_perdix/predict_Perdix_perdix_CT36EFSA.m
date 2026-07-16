@@ -13,7 +13,6 @@ function [prdData, info] = predict_Perdix_perdix_CT36EFSA(par, data, auxData)
 
   TC_ab = tempcorr(temp.ab, T_ref, T_A);
   TC = tempcorr(temp.am, T_ref, T_A); kT_M = TC * k_M;
-
   % ---------- zero-variate data
 
   % initial f=1
@@ -88,10 +87,25 @@ function [prdData, info] = predict_Perdix_perdix_CT36EFSA(par, data, auxData)
   % tvel = get_tp(pars_tp, f_juvenile, [], tW(:,1)*kT_M);
   % EWw = (L_m * tvel(:,4)).^3 .* (1 + tvel(:,3) * ome);   % g, weight
 
-  % Build piecewise-constant f(t)
-  f = f_nest * ones(size(tW(:,1)));
-  f(tW(:,1) >= tT_x) = f_juvenile;
-  f(tW(:,1) >= tT_p) = f_adult;
+  %% --- NEW PIECEWISE FOOD WITH RESTRICTED STARVATION WINDOWS ---
+  % 1. Build the unstarved baseline timeline for the whole life cycle
+  % (Using the baseline parameters defined in pars_init)
+  f = f_base_nest * ones(size(tW(:,1)));
+  f(tW(:,1) >= tT_x) = f_base_juvenile;
+  f(tW(:,1) >= tT_p) = f_base_adult;
+  % 2. Apply the starvation ONLY if the runner modified the parameter
+  % Nest stage starvation (starts at birth t=0, lasts max 7 days or until fledging)
+  if f_nest ~= f_base_nest
+      f(tW(:,1) >= 0 & tW(:,1) < min(7, tT_x)) = f_nest;
+  end
+  % Juvenile stage starvation (starts at fledging t=tT_x, lasts 7 days)
+  if f_juvenile ~= f_base_juvenile
+      f(tW(:,1) >= tT_x & tW(:,1) < tT_x + 7) = f_juvenile;
+  end
+  % Adult stage starvation (starts at puberty t=tT_p, lasts 7 days)
+  if f_adult ~= f_base_adult
+      f(tW(:,1) >= tT_p & tW(:,1) < tT_p + 7) = f_adult;
+  end
   % Build time–food table expected by get_tp
   tf = [tW(:,1) * kT_M, f];
   % Call get_tp once (vectorized in time, piecewise in f)

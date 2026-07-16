@@ -31,12 +31,19 @@ par.E_Hx = 5.624e+03; free.E_Hx  = 1;   units.E_Hx = 'J';         label.E_Hx = '
 % par.f_09 = 0.98331;   free.f_09  = 1;   units.f_09 = '-';         label.f_09 = 'scaled functional response for tW data at 09 d'; 
 % par.f_12 = 1.1316;    free.f_12  = 1;   units.f_12 = '-';         label.f_12 = 'scaled functional response for tW data at 12 d'; 
 par.f_embryo = 1;       free.f_embryo = 0;    units.f_embryo = '-';   label.f_embryo = 'scaled functional response during embryo stage';
-par.f_nest = 2.5;       free.f_embryo = 0;    units.f_embryo = '-';   label.f_embryo = 'scaled functional response during nest (before fledging) stage';
-par.f_juvenile = 1;   free.f_fledging = 0;  units.f_juvenile = '-'; label.f_juvenile = 'scaled functional response during juvenile stage';
-par.f_adult = 1;      free.f_adult = 0;     units.f_adult = '-';    label.f_adult = 'scaled functional response during adult stage';
+
+% --- Normal Baselines (Memory for starvation windows) ---
+par.f_base_nest = 2.5;   free.f_base_nest = 0;  units.f_base_nest = '-';  label.f_base_nest = 'baseline f during nest';
+par.f_base_juvenile  = 1.0;   free.f_base_juvenile  = 0;  units.f_base_juvenile  = '-';  label.f_base_juvenile  = 'baseline f during juvenile';
+par.f_base_adult   = 1.0;   free.f_base_adult   = 0;  units.f_base_adult   = '-';  label.f_base_adult   = 'baseline f during adult';
+% --- Active parameters (These get modified by the runner script) ---
+par.f_nest     = par.f_base_nest;  free.f_nest     = 0;  units.f_nest     = '-';  label.f_nest     = 'active f during nest';
+par.f_juvenile = par.f_base_juvenile;   free.f_juvenile = 0;  units.f_juvenile = '-';  label.f_juvenile = 'active f during juvenile';
+par.f_adult    = par.f_base_adult;    free.f_adult    = 0;  units.f_adult    = '-';  label.f_adult    = 'active f during adult';
+
 par.t_R = 365;        free.t_R   = 0;   units.t_R = 'd';          label.t_R = 'time since birth at first brood'; 
 
-%% set chemical parameters from Kooy2010 
+%% set chemical parameters from Kooy2010
 [par, units, label, free] = addchem(par, units, label, free, metaData.phylum, metaData.class); 
 
 %% Pack output: 
