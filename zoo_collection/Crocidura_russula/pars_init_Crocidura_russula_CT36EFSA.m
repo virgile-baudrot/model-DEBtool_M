@@ -1,6 +1,6 @@
 function [par, metaPar, txtPar] = pars_init_Crocidura_russula_CT36EFSA(metaData)
 
-metaPar.model = 'stx'; 
+metaPar.model = 'stx'; % Foetal development model (mammals)
 
 %% reference parameter (not to be changed) 
 par.T_ref = 293.15;   free.T_ref = 0;   units.T_ref = 'K';        label.T_ref = 'Reference temperature'; 
@@ -26,12 +26,19 @@ par.s_G = 0.01;       free.s_G   = 0;   units.s_G = '-';          label.s_G = 'G
 par.t_0 = 23.5287;    free.t_0   = 1;   units.t_0 = 'd';          label.t_0 = 'time at start development'; 
 
 %% other parameters 
-% par.f = 1;            free.f     = 0;   units.f = '-';            label.f = 'scaled functional response for 0-var data'; 
-% par.f_tW = 1;         free.f_tW  = 0;   units.f_tW = '-';         label.f_tW = 'scaled functional response for tW data'; 
-par.f_embryo = 1;     free.f_embryo = 0;    units.f_embryo = '-';   label.f_embryo = 'scaled func response for embryo';
-par.f_nest = 1;     free.f_post = 0;      units.f_post = '-';     label.f_post = 'scaled func response post-birth';
-par.f_juvenile = 1;   free.f_juvenile = 0;  units.f_juvenile = '-'; label.f_juvenile = 'scaled functional response during juvenile stage';
-par.f_adult = 1;      free.f_adult = 0;     units.f_adult = '-';    label.f_adult = 'scaled functional response during adult stage';
+par.f_foetus = 1;         free.f_foetus = 0;    units.f_foetus = '-';   label.f_foetus = 'scaled functional response during foetus stage';
+
+par.f_tW = 1.0;   free.f_tW  = 1;      units.f_tW = '-';      label.f_tW = 'scaled func response for tW data';
+% --- Normal Baselines (Memory for starvation windows) ---
+par.f_base_lactation = par.f_tW;   free.f_base_lactation = 0;  units.f_base_lactation = '-';  label.f_base_lactation = 'baseline f during lactation';
+par.f_base_juvenile  = par.f_tW;   free.f_base_juvenile  = 0;  units.f_base_juvenile  = '-';  label.f_base_juvenile  = 'baseline f during juvenile';
+par.f_base_adult   = par.f_tW;     free.f_base_adult   = 0;  units.f_base_adult   = '-';  label.f_base_adult   = 'baseline f during adult';
+
+% --- Active parameters (These get modified by the runner script) ---
+par.f_lactation = par.f_base_lactation;  free.f_lactation = 0;  units.f_lactation = '-';  label.f_lactation = 'active f during lactation';
+par.f_juvenile = par.f_base_juvenile;    free.f_juvenile = 0;   units.f_juvenile = '-';   label.f_juvenile = 'active f during juvenile';
+par.f_adult    = par.f_base_adult;       free.f_adult    = 0;   units.f_adult    = '-';   label.f_adult    = 'active f during adult';
+
 
 %% set chemical parameters from Kooy2010 
 [par, units, label, free] = addchem(par, units, label, free, metaData.phylum, metaData.class); 

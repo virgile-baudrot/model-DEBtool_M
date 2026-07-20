@@ -26,14 +26,19 @@ par.s_G = 0.0001;     free.s_G   = 0;   units.s_G = '-';          label.s_G = 'G
 %% other parameters 
 par.E_Hpm = 7.951e+04; free.E_Hpm = 1;   units.E_Hpm = 'J';        label.E_Hpm = 'maturity at puberty for males'; 
 par.del_M = 0.17581;   free.del_M = 1;   units.del_M = '-';        label.del_M = 'shape coefficient for females'; 
-par.del_Mm = 0.18288;  free.del_Mm = 1;   units.del_Mm = '-';       label.del_Mm = 'shape coefficient males'; 
-% par.f = 0.73;         free.f     = 0;   units.f = '-';            label.f = 'scaled functional response for 0-var data'; 
-% par.f_D = 0.87427;    free.f_D   = 1;   units.f_D = '-';          label.f_D = 'scaled functional response at tL_D data'; 
-% par.f_K = 0.94367;    free.f_K   = 1;   units.f_K = '-';          label.f_K = 'scaled functional response at tL_K data'; 
-par.f_embryo = 1;       free.f_embryo = 0;    units.f_embryo = '-';   label.f_embryo = 'scaled functional response during embryo stage';
-par.f_juvenile = 0.9;     free.f_juvenile = 0;  units.f_juvenile = '-'; label.f_juvenile = 'scaled functional response during juvenile stage';
-par.f_adult = 1;        free.f_adult = 0;     units.f_adult = '-';    label.f_adult = 'scaled functional response during adult stage';
-par.z_m = 1.1589;       free.z_m   = 1;   units.z_m = '-';          label.z_m = 'zoom factor for males'; 
+par.del_Mm = 0.18288;  free.del_Mm = 1;  units.del_Mm = '-';       label.del_Mm = 'shape coefficient males'; 
+par.z_m = 1.1589;      free.z_m   = 1;   units.z_m = '-';          label.z_m = 'zoom factor for males'; 
+
+%% Food level parameters
+% --- Normal Baselines (Memory for starvation windows) ---
+par.f_base_embryo   = 1.0;   free.f_base_embryo   = 0;  units.f_base_embryo   = '-';  label.f_base_embryo   = 'baseline f during embryo';
+par.f_base_juvenile = 0.9;   free.f_base_juvenile = 0;  units.f_base_juvenile = '-';  label.f_base_juvenile = 'baseline f during juvenile';
+par.f_base_adult    = 1.0;   free.f_base_adult    = 0;  units.f_base_adult    = '-';  label.f_base_adult    = 'baseline f during adult';
+
+% --- Active parameters (These get modified by the runner script) ---
+par.f_embryo   = par.f_base_embryo;    free.f_embryo   = 0;  units.f_embryo   = '-';  label.f_embryo   = 'active f during embryo';
+par.f_juvenile = par.f_base_juvenile;  free.f_juvenile = 0;  units.f_juvenile = '-';  label.f_juvenile = 'active f during juvenile';
+par.f_adult    = par.f_base_adult;     free.f_adult    = 0;  units.f_adult    = '-';  label.f_adult    = 'active f during adult';
 
 %% set chemical parameters from Kooy2010 
 [par, units, label, free] = addchem(par, units, label, free, metaData.phylum, metaData.class); 

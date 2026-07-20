@@ -18,24 +18,37 @@ par.p_T = 0;          free.p_T   = 0;   units.p_T = 'J/d.cm^2';   label.p_T = '{
 par.k_J = 0.002;      free.k_J   = 0;   units.k_J = '1/d';        label.k_J = 'maturity maint rate coefficient'; 
 par.E_G = 7326.1449;  free.E_G   = 1;   units.E_G = 'J/cm^3';     label.E_G = '[E_G], spec cost for structure'; 
 par.E_Hb = 2.748e+01; free.E_Hb  = 1;   units.E_Hb = 'J';         label.E_Hb = 'maturity at birth'; 
-par.E_Hp = 1.303e+06; free.E_Hp  = 1;   units.E_Hp = 'J';         label.E_Hp = 'maturity at puberty'; 
+par.E_Hp = 1.303e+06; free.E_Hp  = 1;   units.E_Hp = 'J';         label.E_Hp = 'maturity at puberty for females'; 
 par.h_a = 3.221e-09;  free.h_a   = 1;   units.h_a = '1/d^2';      label.h_a = 'Weibull aging acceleration'; 
 par.s_G = 0.0001;     free.s_G   = 0;   units.s_G = '-';          label.s_G = 'Gompertz stress coefficient'; 
 
 %% other parameters 
 par.E_Hj = 8.825e+02; free.E_Hj  = 1;   units.E_Hj = 'J';         label.E_Hj = 'maturity at metam'; 
 par.T_A = 6000;       free.T_A   = 0;   units.T_A = 'K';          label.T_A = 'Arrhenius temperature'; 
-par.del_M = 0.15129;  free.del_M = 1;   units.del_M = '-';        label.del_M = 'shape coefficient'; 
-% par.f = 0.85;            free.f     = 0;   units.f = '-';            label.f = 'scaled functional response for 0-var data'; 
-par.f_full = 0.85;     free.f_LdL = 0;   units.f_LdL = '-';        label.f_LdL = 'scaled functional response for LdL data';
+%par.del_M = 0.15129;  free.del_M = 1;   units.del_M = '-';        label.del_M = 'shape coefficient'; 
+par.del_M = 0.1;  free.del_M = 1;   units.del_M = '-';        label.del_M = 'shape coefficient'; 
+% Male specifics (Fact: Males slightly smaller than females)
+par.z_m   = 1.326;     free.z_m   = 1;   units.z_m   = '-';        label.z_m   = 'zoom factor for males'; 
+par.E_Hpm = 1.303e+06; free.E_Hpm = 1;   units.E_Hpm = 'J';        label.E_Hpm = 'maturity at puberty for males'; 
+
+%% Food level parameters
 par.f_embryo = 1;       free.f_embryo = 0;    units.f_embryo = '-';   label.f_embryo = 'scaled functional response during embryo stage';
-par.f_nest = 1;         free.f_nest = 0;    units.f_nest = '-';   label.f_embryo = 'scaled functional response during nest (before metamorphosis) stage';
-par.f_juvenile = 1;     free.f_juvenile = 0;  units.f_juvenile = '-'; label.f_juvenile = 'scaled functional response during juvenile stage';
-par.f_adult = 1;        free.f_adult = 0;     units.f_adult = '-';    label.f_adult = 'scaled functional response during adult stage';
+
+f_full = 1.0;
+% --- Normal Baselines (Memory for starvation windows) ---
+par.f_base_nest     = f_full;  free.f_base_nest     = 0;  units.f_base_nest     = '-';  label.f_base_nest     = 'baseline f during nest (pre-metamorphosis)';
+par.f_base_juvenile = f_full;  free.f_base_juvenile = 0;  units.f_base_juvenile = '-';  label.f_base_juvenile = 'baseline f during juvenile';
+par.f_base_adult    = f_full;  free.f_base_adult    = 0;  units.f_base_adult    = '-';  label.f_base_adult    = 'baseline f during adult';
+
+% --- Active parameters (These get modified by the runner script) ---
+par.f_nest     = par.f_base_nest;      free.f_nest     = 0;  units.f_nest     = '-'; label.f_nest     = 'active f during nest';
+par.f_juvenile = par.f_base_juvenile;  free.f_juvenile = 0;  units.f_juvenile = '-'; label.f_juvenile = 'active f during juvenile';
+par.f_adult    = par.f_base_adult;     free.f_adult    = 0;  units.f_adult    = '-'; label.f_adult    = 'active f during adult';
+
+par.f_LdL = 0.85;     free.f_LdL = 0;   units.f_LdL = '-';        label.f_LdL = 'scaled functional response for LdL data';
 
 %% set chemical parameters from Kooy2010 
 [par, units, label, free] = addchem(par, units, label, free, metaData.phylum, metaData.class); 
-
 
 %% Pack output: 
 txtPar.units = units; txtPar.label = label; par.free = free; 

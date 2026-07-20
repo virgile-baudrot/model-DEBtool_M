@@ -1,5 +1,5 @@
 function [prdData, info] = predict_Perdix_perdix_CT36EFSA(par, data, auxData)
-  
+
   % unpack par, data, auxData
   cPar = parscomp_st(par); vars_pull(par); 
   vars_pull(cPar);  vars_pull(data);  vars_pull(auxData);
@@ -32,22 +32,21 @@ function [prdData, info] = predict_Perdix_perdix_CT36EFSA(par, data, auxData)
   Ww_b = L_b^3 * (1 + f_embryo * ome);   % g, wet weight at birth at f 
   aT_b = tau_b/ k_M/ TC_ab;              % d, age at birth at f and T
 
-
   %% Juvenile with f_juvenile
   % fledging
   pars_tx = [g; k; l_T; v_Hb; v_Hx];  % compose parameter vector
   [tau_x, ~,l_x,~,info] = get_tp(pars_tx, f_nest); if info == 0; prdData = []; return; end
-  % puberty 
+  % puberty
   pars_tp = [g; k; l_T; v_Hb; v_Hp];  % compose parameter vector
   [tau_p, ~ , l_p, ~, info] = get_tp(pars_tp, f_juvenile); if info == 0; prdData = []; return; end % -, scaled times & lengths at f
 
   % fledging
   tT_x = (tau_x - tau_b)/ kT_M;          % d, time since birth at fledging
-  % puberty 
+  % puberty
   tT_p = (tau_p - tau_b)/ kT_M;          % d, time since birth at puberty
 
   %% Adulte with f_adult
-  % ultimate 
+  % ultimate
   l_i = f - l_T;                         % -, scaled ultimate length
   L_i = L_m * l_i;                       % cm, ultimate structural length at f
   Ww_i = L_i^3 * (1 + f_adult * ome);          % g, ultimate wet weight 
@@ -58,7 +57,7 @@ function [prdData, info] = predict_Perdix_perdix_CT36EFSA(par, data, auxData)
   pars_tm = [g; l_T; h_a/ k_M^2; s_G];    % compose parameter vector at T_ref
   tau_m = get_tm_s(pars_tm, f_adult, l_b);      % -, scaled mean life span at T_ref
   aT_m = tau_m/ k_M/ TC;                  % d, mean life span at T
-  
+
   % males
   p_Am_m = z_m * p_M/ kap;             % J/d.cm^2, {p_Am} spec assimilation flux
   E_m_m = p_Am_m/ v;                   % J/cm^3, reserve capacity [E_m]
@@ -80,7 +79,7 @@ function [prdData, info] = predict_Perdix_perdix_CT36EFSA(par, data, auxData)
   prdData.Wwi = Ww_i;
   prdData.Wwim = Ww_im;
   prdData.Ri = RT_i;
-  
+
   % ---------- uni-variate data
   %% Juvenile
   % time-weight

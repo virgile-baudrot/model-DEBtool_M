@@ -61,8 +61,22 @@ vars_to_extract(strcmp(vars_to_extract, 'f_value')) = [];
 n_vars = length(vars_to_extract);
 n_cols = ceil(n_vars / 2);
 
+% --- Dictionnaire des descriptions des variables ---
+var_descriptions = containers.Map(...
+    {'ab', 'tx', 'tp', 'tR', 'am', 'Wwb', 'Wwi', 'Wwim', 'Ww0', 'Ri'}, ...
+    {'age at birth', ...
+     'time since birth at fledging', ...
+     'time since birth at puberty', ...
+     'time since birth at 1st brood', ...
+     'life span', ...
+     'wet weight at birth', ...
+     'ultimate wet weight', ...
+     'ultimate wet weight for males', ...
+     'initial wet weight', ...
+     'maximum reproductive rate'});
+
 % Création de la figure
-fig = figure('Name', 'Comparaison des Modalites', 'Color', 'w', 'Position', [100, 100, 1400, 800]);
+fig = figure('Name', 'Comparaison des Modalites', 'Color', 'w', 'Position', [100, 100, 1400, 400]);
 t = tiledlayout(2, n_cols, 'TileSpacing', 'normal', 'Padding', 'compact');
 xlabel(t, 'Reduction factor applied to functional response', 'FontWeight', 'bold', 'FontSize', 16, 'Color', 'k');
 
@@ -81,17 +95,24 @@ for v = 1:n_vars
     p2 = plot(T_juv.f_value,  T_juv.(var_name),  '-s', 'Color', c_juv,  'MarkerFaceColor', c_juv,  'LineWidth', 2, 'MarkerSize', 4);
     p3 = plot(T_ad.f_value,   T_ad.(var_name),   '-^', 'Color', c_ad,   'MarkerFaceColor', c_ad,   'LineWidth', 2, 'MarkerSize', 4);
 
-    % Titre et style du facet
-    title(var_name, 'FontWeight', 'bold', 'FontSize', 14, 'Color', 'k');
-    set(gca, 'Color', 'w', 'XColor', 'k', 'YColor', 'k', 'FontSize', 12);
+    % --- Formatage du titre sur plusieurs lignes ---
+    if isKey(var_descriptions, var_name)
+        % Création d'un "cell array" pour forcer le retour à la ligne
+        % Ligne 1: description complète, Ligne 2: (nom_variable)
+        plot_title = {var_descriptions(var_name), sprintf('(%s)', var_name)};
+    else
+        plot_title = var_name; % Sécurité au cas où une variable manque dans le dictionnaire
+    end
+
+    % Title and facet style (FontSize légèrement réduit à 12 pour tenir sur 2 lignes)
+    title(plot_title, 'FontWeight', 'bold', 'FontSize', 12, 'Color', 'k');
+    set(gca, 'Color', 'w', 'XColor', 'k', 'YColor', 'k', 'FontSize', 11);
     grid off; box on;
     hold off;
 
-    % Ajouter la légende uniquement sur le premier graphique pour ne pas surcharger l'image
+    % Add legend only to the first plot to avoid cluttering
     if v == 1
-        % Légende transparente et texte noir
-        lgd = legend([p1, p2, p3], strrep(f_modes, '_', '\_'), 'Location', 'best', 'FontSize', 11, 'TextColor', 'k');
-        set(lgd, 'Color', 'none', 'Box', 'off');
+        legend([p1, p2, p3], strrep(f_modes, '_', '\_'), 'Location', 'best', 'FontSize', 11);
     end
 end
 

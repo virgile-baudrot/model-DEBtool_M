@@ -6,6 +6,6 @@ add-my-pet.github.io/debtool_m/docs/
 
 From a folder
 
-```
+```matlab
 matlab -batch "master_run"
 ```

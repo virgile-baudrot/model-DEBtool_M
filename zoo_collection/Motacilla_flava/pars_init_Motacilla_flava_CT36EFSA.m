@@ -25,15 +25,19 @@ par.s_G = 0.01;       free.s_G   = 0;   units.s_G = '-';          label.s_G = 'G
 
 %% other parameters 
 par.E_Hx = 2.647e+02;   free.E_Hx  = 1;   units.E_Hx = 'J';         label.E_Hx = 'maturity at fledging'; 
-% par.f = 1;            free.f     = 0;   units.f = '-';            label.f = 'scaled functional response for 0-var data'; 
-% par.f_02 = 1.7989;    free.f_02  = 1;   units.f_02 = '-';         label.f_02 = 'scaled functional response for tW data at 02 d'; 
-% par.f_04 = 6.454;     free.f_04  = 1;   units.f_04 = '-';         label.f_04 = 'scaled functional response for tW data at 04 d'; 
-% par.f_06 = 2.5592;    free.f_06  = 1;   units.f_06 = '-';         label.f_06 = 'scaled functional response for tW data at 06 d'; 
-% par.f_08 = 0.96176;   free.f_08  = 1;   units.f_08 = '-';         label.f_08 = 'scaled functional response for tW data at 9 d';
 par.f_embryo = 1;       free.f_embryo = 0;    units.f_embryo = '-';   label.f_embryo = 'scaled functional response during embryo stage';
-par.f_nest = 4;         free.f_nest = 0;    units.f_embryo = '-';   label.f_embryo = 'scaled functional response during nest (before fledging) stage';
-par.f_juvenile = 1;     free.f_juvenile = 0;  units.f_juvenile = '-'; label.f_juvenile = 'scaled functional response during juvenile stage';
-par.f_adult = 1;        free.f_adult = 0;     units.f_adult = '-';    label.f_adult = 'scaled functional response during adult stage';
+
+% --- Normal Baselines (Memory for starvation windows) ---
+par.f_base_nest = 4.0;        free.f_base_nest = 0;  units.f_base_nest = '-';  label.f_base_nest = 'baseline f during nest';
+par.f_base_juvenile  = 1.0;   free.f_base_juvenile  = 0;  units.f_base_juvenile  = '-';  label.f_base_juvenile  = 'baseline f during juvenile';
+par.f_base_adult   = 1.0;     free.f_base_adult   = 0;  units.f_base_adult   = '-';  label.f_base_adult   = 'baseline f during adult';
+
+% --- Active parameters (These get modified by the runner script) ---
+par.f_nest     = par.f_base_nest;       free.f_nest     = 0;  units.f_nest     = '-';  label.f_nest     = 'active f during nest';
+par.f_juvenile = par.f_base_juvenile;   free.f_juvenile = 0;  units.f_juvenile = '-';  label.f_juvenile = 'active f during juvenile';
+par.f_adult    = par.f_base_adult;      free.f_adult    = 0;  units.f_adult    = '-';  label.f_adult    = 'active f during adult';
+
+
 par.t_R = 365;          free.t_R   = 0;   units.t_R = 'd';          label.t_R = 'time since birth at first brood'; 
 
 %% set chemical parameters from Kooy2010 

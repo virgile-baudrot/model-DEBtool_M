@@ -1,4 +1,4 @@
-function [prdData, info] = predict_Turdus_philomelos(par, data, auxData)
+function [prdData, info] = predict_Turdus_philomelos_CT36EFSA(par, data, auxData)
   
   % unpack par, data, auxData
   cPar = parscomp_st(par); vars_pull(par); 
@@ -12,23 +12,28 @@ function [prdData, info] = predict_Turdus_philomelos(par, data, auxData)
 
   % life cycle
   pars_tx = [g; k; l_T; v_Hb; v_Hx];  % compose parameter vector
-  tau_x = get_tp(pars_tx, f_nest); 
+  [tau_x, ~, l_x, ~, info] = get_tp(pars_tx, f_nest);
   pars_tp = [g; k; l_T; v_Hb; v_Hp];  % compose parameter vector
   [~, tau_b, ~, l_b, info] = get_tp(pars_tp, f_embryo);  % -, scaled times & lengths
   [tau_p, ~, l_p, ~, info] = get_tp(pars_tp, f_juvenile);  % -, scaled times & lengths
   if ~info; prdData = []; return; end
-
   
   % birth
   L_b = L_m * l_b;                  % cm, structural length at birth at f
   Ww_b = L_b^3 * (1 + f_embryo * ome);       % g, wet weight at birth at f 
-  aT_b = tau_b/ k_M/ TC_ab;     % d, age at birth at f and T
+  tT_b = tau_b/ k_M/ TC_ab;           % d, age at birth at f and T
+  aT_b = tT_b;                % d, time at birth at f and T
+  t_g = tT_b;                 % d, gestation time (time from fertilization to birth)
 
   % fledging
   tT_x = (tau_x - tau_b)/ kT_M;         % d, time since birth at fledging
+  L_x = L_m * l_x;
+  Ww_x = L_x^3 * (1 + f_nest * ome);
 
   % puberty
   tT_p = (tau_p - tau_b)/ kT_M;         % d, time since birth at puberty
+  L_p = L_m * l_p;
+  Ww_p = L_p^3 * (1 + f_juvenile * ome);
 
   % ultimate
   l_i = f_adult - l_T;                    % -, scaled ultimate length
@@ -46,28 +51,46 @@ function [prdData, info] = predict_Turdus_philomelos(par, data, auxData)
   
   % pack to output
   prdData.ab = aT_b;
+  prdData.tg = t_g;
   prdData.tx = tT_x;
   prdData.tp = tT_p;
   prdData.tR = t_R;
   prdData.am = aT_m;
+  prdData.Li = L_i;
   prdData.Wwb = Ww_b;
+  prdData.Wwx = Ww_x;
+  prdData.Wwp = Ww_p;
   prdData.Wwi = Ww_i;
   prdData.Ri = RT_i;
   
   % uni-variate data
-  % time-weight
-  % tf = [0 03 05 07 09 10 12; f_00 f_03 f_05 f_07 f_09 f_10 f_12]'; tf(:,1) = tf(:,1) * kT_M;
-  % tvel = get_tp(pars_tp, tf, [tau_b 1 l_b], tW(:,1)*kT_M);
-  % EWw = (L_m * tvel(:,4)).^3 .* (1 + tvel(:,3) * ome);   % g, weight
-
-  % Build piecewise-constant f(t)
-  f = f_nest * ones(size(tW(:,1)));
-  f(tW(:,1) >= tT_x) = f_juvenile;
-  f(tW(:,1) >= tT_p) = f_adult;
-  % Build time–food table expected by get_tp
+  
+  %% --- NEW PIECEWISE FOOD WITH A 7-DAY RESTRICTED STARVATION WINDOW ---
+  % 1. Build the unstarved baseline timeline for the whole life cycle
+  f = f_base_nest * ones(size(tW(:,1)));
+  f(tW(:,1) >= tT_x) = f_base_juvenile;
+  f(tW(:,1) >= tT_p) = f_base_adult;
+  
+  % 2. Apply the 7-day starvation ONLY if the runner modified the parameter
+  % Nest stage starvation (starts at birth t=0, lasts 7 days)
+  if f_nest ~= f_base_nest
+      f(tW(:,1) >= 0 & tW(:,1) < min(7, tT_x)) = f_nest;
+  end
+  % Juvenile stage starvation (starts at fledging t=tT_x, lasts 7 days)
+  if f_juvenile ~= f_base_juvenile
+      f(tW(:,1) >= tT_x & tW(:,1) < tT_x + 7) = f_juvenile;
+  end
+  % Adult stage starvation (starts at puberty t=tT_p, lasts 7 days)
+  if f_adult ~= f_base_adult
+      f(tW(:,1) >= tT_p & tW(:,1) < tT_p + 7) = f_adult;
+  end
+  
+  % Build time-food table expected by get_tp
   tf = [tW(:,1) * kT_M, f];
+
   % Call get_tp once (vectorized in time, piecewise in f)
   tvel = get_tp(pars_tp, tf, [tau_b 1 l_b], tW(:,1) * kT_M);
+  
   % Compute wet weight
   EWw = (L_m .* tvel(:,4)).^3 .* (1 + tvel(:,3) .* ome);
   

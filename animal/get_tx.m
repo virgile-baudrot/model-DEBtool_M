@@ -156,12 +156,12 @@ function [value,isterminal,direction] = event_xp(tau, vel, info_tau, tf, g, k, l
   % vel: 3-vector with [v_H; e; l]
   value = [v_Hx; v_Hp] - vel(1);
   isterminal = [0; ~info_tau];
-  direction  = [0; ]; 
+  direction  = [0; 0];
 end
 
 function [value,isterminal,direction] = event_b(tau, vl, f, s_F, g, k, v_Hb)
   % vel: 2-vector with [v_H; l]
   value = v_Hb - vl(1);
   isterminal = 1;
-  direction  = 0; 
+  direction  = 0;
 end
