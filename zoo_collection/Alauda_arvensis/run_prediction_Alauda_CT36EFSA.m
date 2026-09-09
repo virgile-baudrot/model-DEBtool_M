@@ -145,6 +145,7 @@ for mode_idx = 1:numel(f_modes)
             simStruct.f_value = f_values(i);
             simStruct.results = prdSim;
             simStruct.parameters = paramStruct;
+            simStruct.times = times;
 
             allSim = [allSim; simStruct];          %#ok<AGROW>
         end

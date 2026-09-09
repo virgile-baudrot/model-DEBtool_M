@@ -130,7 +130,7 @@ for mode_idx = 1:numel(f_modes)
                 end
             end
             paramStruct = table2struct(sortrows(table(names, values, units, labels, 'VariableNames', {'param','value','unit','label'}),'param'),'ToScalar',true);
-            allSim = [allSim; struct('f_value', f_values(i), 'results', prdSim, 'parameters', paramStruct)];          
+            allSim = [allSim; struct('f_value', f_values(i), 'results', prdSim, 'parameters', paramStruct, 'times', times)];          
         else
             fprintf('     [-] Prediction returned info=0. Skipping.\n');
         end
