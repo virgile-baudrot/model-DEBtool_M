@@ -25,7 +25,7 @@ zoo_collection/
     el_path_CT36EFSA.m             reserve and length along a piecewise-constant food path
     octave_shims/                  MATLAB functions missing or different in Octave
   CT36EFSA_results/                outputs of run_all_CT36EFSA.sh (figures + CSV)
-  CT36EFSA_analysis/               Chapter 2 sensitivity analysis (R Markdown + CSV inputs)
+  CT36EFSA_analysis/               Chapter 2 sensitivity analysis: plot_analysis_CT36EFSA.R, CSV inputs, figures
 ```
 
 ## Scenarios
@@ -62,7 +62,7 @@ are the same for both scenarios and are written once.
 | Fig C.9 | `Rana_temporaria_full_growth_combined.png` |
 | Figs C.10, C.11 | `Podarcis_muralis_full_combined_dynamics.png` (SVL panels for C.10, weight-SVL panels for C.11) |
 | Fig C.12 | `Podarcis_muralis_full_combined_fecundity.png` |
-| Figs 2.2-2.17 | rendered by `CT36EFSA_analysis/dataAnalysis_CT36EFSA.Rmd` |
+| Figs 2.2-2.19 | `CT36EFSA_analysis/<sp>_prediction.png` (even numbers) and `CT36EFSA_analysis/<sp>_elasticity.png` (odd numbers) |
 
 The CSV files behind the figures are in the same folders:
 - `traj_<sp>_<stage>.csv` and `traj_<sp>_<stage>_full.csv`: growth curves (f_value, panel, x, y)
@@ -77,8 +77,7 @@ The CSV files behind the figures are in the same folders:
 Requirements:
 - GNU Octave 8.4. It was installed with `micromamba create -n octave -c conda-forge octave`.
   MATLAB is not used. The shims in `CT36EFSA_pipeline/octave_shims` are added automatically.
-- R with `ggplot2`, `patchwork` and `viridis` for the figures. The Chapter 2 Rmd also needs
-  `readr`, `dplyr`, `tidyr`, `gridExtra` and `broom`.
+- R with `ggplot2`, `patchwork` and `viridis` for the figures (Chapter 2 needs only `ggplot2`).
 
 ```bash
 # from the repository root; about 30 min per scenario with 3 Octave processes
@@ -88,8 +87,8 @@ OCTAVE=/path/to/octave JOBS=3 bash zoo_collection/CT36EFSA_pipeline/run_all_CT36
 # check a rerun against the committed results (CSV only: PNG bytes depend on the R version)
 cd zoo_collection/CT36EFSA_results && sha256sum -c MANIFEST_CT36EFSA.sha256 2>/dev/null | grep -v ': OK' | grep csv
 
-# Chapter 2 figures
-cd zoo_collection/CT36EFSA_analysis && Rscript -e 'rmarkdown::render("dataAnalysis_CT36EFSA.Rmd")'
+# Chapter 2 figures (-> CT36EFSA_analysis, with elasticity_CT36EFSA.csv)
+Rscript zoo_collection/CT36EFSA_analysis/plot_analysis_CT36EFSA.R
 ```
 
 The Chapter 2 inputs (`ref_values - <sp>.csv`, `variation_f_food - <sp>.csv`) are the
