@@ -1,10 +1,10 @@
 function [prdData, info] = predict_Perdix_perdix_CT36EFSA(par, data, auxData)
 
   % unpack par, data, auxData
-  cPar = parscomp_st(par); vars_pull(par); 
+  cPar = parscomp_st(par); vars_pull(par);
   vars_pull(cPar);  vars_pull(data);  vars_pull(auxData);
 
-  % Additional code to export vairbale in the workspace
+  % Additional code to export variables in the workspace
   assignin('base', 'par', par);
   assignin('base', 'cPar', cPar);
   assignin('base', 'data', data);
@@ -13,7 +13,13 @@ function [prdData, info] = predict_Perdix_perdix_CT36EFSA(par, data, auxData)
 
   TC_ab = tempcorr(temp.ab, T_ref, T_A);
   TC = tempcorr(temp.am, T_ref, T_A); kT_M = TC * k_M;
-  % ---------- zero-variate data
+
+  % ---------- zero-variate data: CHRONIC outputs
+  % Each stage f is held constant from birth (tx at f_nest, tp at f_juvenile)
+  % or over the whole life (Wwi, Ri, am at f_adult).
+  % An event that cannot be reached at that f (ultimate maturity below the
+  % threshold, see get_tp.m) is returned as NaN; the run itself goes on.
+  reach = @(f_val, vH) f_val * max(0, f_val - l_T)^2 > k * vH; % -, DEBtool condition
 
   % initial f=1
   pars_UE0 = [V_Hb; g; k_J; k_M; v];
@@ -21,38 +27,43 @@ function [prdData, info] = predict_Perdix_perdix_CT36EFSA(par, data, auxData)
   E_0 = p_Am * U_E0;            % J, initial energy content
   Ww_0 = w_E * E_0/ mu_E/ d_E;  % g, initial wet weight
 
-  % parameters for get_lb
-  pars_lb = [g; k; v_Hb];
-  pars_tb = [g; k; v_Hb];
-  % scaled length at birth
-  [l_b, info_lb] = get_lb(pars_lb, f); if info_lb == 0 prdData = []; return; end
-  [tau_b, info_tb] = get_tb(pars_tb, f); if info_tb == 0 prdData = []; return; end
   % birth with f_embryo
+  [tau_b, l_b, info] = get_tb([g; k; v_Hb], f_embryo); % -, scaled age & length at birth
+  if ~info; prdData = []; return; end
   L_b = L_m * l_b;                       % cm, structural length at birth at f
-  Ww_b = L_b^3 * (1 + f_embryo * ome);   % g, wet weight at birth at f 
+  Ww_b = L_b^3 * (1 + f_embryo * ome);   % g, wet weight at birth at f
   aT_b = tau_b/ k_M/ TC_ab;              % d, age at birth at f and T
 
   %% Juvenile with f_juvenile
-  % fledging
   pars_tx = [g; k; l_T; v_Hb; v_Hx];  % compose parameter vector
-  [tau_x, ~,l_x,~,info] = get_tp(pars_tx, f_nest); if info == 0; prdData = []; return; end
-  % puberty
   pars_tp = [g; k; l_T; v_Hb; v_Hp];  % compose parameter vector
-  [tau_p, ~ , l_p, ~, info] = get_tp(pars_tp, f_juvenile); if info == 0; prdData = []; return; end % -, scaled times & lengths at f
-
   % fledging
-  tT_x = (tau_x - tau_b)/ kT_M;          % d, time since birth at fledging
+  tau_x = NaN; tau_bx = NaN;
+  if reach(f_nest, v_Hx)
+    [tau_x, tau_bx, ~, ~, info_x] = get_tp(pars_tx, f_nest);
+    if ~info_x; tau_x = NaN; end
+  end
   % puberty
-  tT_p = (tau_p - tau_b)/ kT_M;          % d, time since birth at puberty
+  tau_p = NaN; tau_bp = NaN;
+  if reach(f_juvenile, v_Hp)
+    [tau_p, tau_bp, ~, ~, info_p] = get_tp(pars_tp, f_juvenile);
+    if ~info_p; tau_p = NaN; end
+  end
+  tT_x = (tau_x - tau_bx)/ kT_M;         % d, time since birth at fledging (NaN if not reached)
+  tT_p = (tau_p - tau_bp)/ kT_M;         % d, time since birth at puberty (NaN if not reached)
 
-  %% Adulte with f_adult
+  %% Adult with f_adult
   % ultimate
-  l_i = f - l_T;                         % -, scaled ultimate length
+  l_i = f_adult - l_T;                   % -, scaled ultimate length
   L_i = L_m * l_i;                       % cm, ultimate structural length at f
-  Ww_i = L_i^3 * (1 + f_adult * ome);          % g, ultimate wet weight 
+  Ww_i = L_i^3 * (1 + f_adult * ome);    % g, ultimate wet weight
   % reproduction
   pars_R = [kap; kap_R; g; k_J; k_M; L_T; v; U_Hb; U_Hp]; % compose parameter vector at T
-  RT_i = TC * reprod_rate(L_i, f_adult, pars_R);                % #/d, ultimate reproduction rate at T
+  if reach(f_adult, v_Hp)
+    RT_i = TC * reprod_rate(L_i, f_adult, pars_R);   % #/d, ultimate reproduction rate at T
+  else
+    RT_i = 0; % maturity maintenance at E_Hp exceeds the flux to maturity/reproduction
+  end
   % life span
   pars_tm = [g; l_T; h_a/ k_M^2; s_G];    % compose parameter vector at T_ref
   tau_m = get_tm_s(pars_tm, f_adult, l_b);      % -, scaled mean life span at T_ref
@@ -62,10 +73,10 @@ function [prdData, info] = predict_Perdix_perdix_CT36EFSA(par, data, auxData)
   p_Am_m = z_m * p_M/ kap;             % J/d.cm^2, {p_Am} spec assimilation flux
   E_m_m = p_Am_m/ v;                   % J/cm^3, reserve capacity [E_m]
   g_m = E_G/ (kap* E_m_m);             % -, energy investment ratio
-  m_Em_m = y_E_V * E_m_m/ E_G;         % mol/mol, reserve capacity 
+  m_Em_m = y_E_V * E_m_m/ E_G;         % mol/mol, reserve capacity
   ome_m = m_Em_m * w_E/ w_V;             % -, contribution of reserve to weight
   L_mm = v/ k_M/ g_m;                  % cm, max struct length
-  L_bm = l_b * L_mm; L_im = f_adult * L_mm;  % cm, struct length, birth & ultimate
+  L_im = f_adult * L_mm;               % cm, ultimate struct length
   Ww_im = L_im^3 * (1 + f_adult * ome_m);      % g, ultimate wet weight
 
   % pack to output
@@ -80,30 +91,41 @@ function [prdData, info] = predict_Perdix_perdix_CT36EFSA(par, data, auxData)
   prdData.Wwim = Ww_im;
   prdData.Ri = RT_i;
 
-  % ---------- uni-variate data
-  %% Juvenile
-  % time-weight
-  % tvel = get_tp(pars_tp, f_juvenile, [], tW(:,1)*kT_M);
-  % EWw = (L_m * tvel(:,4)).^3 .* (1 + tvel(:,3) * ome);   % g, weight
+  % ---------- uni-variate data: ACUTE scenario (n-day window)
 
-  %% --- NEW PIECEWISE FOOD WITH RESTRICTED STARVATION WINDOWS ---
+  %% --- PIECEWISE FOOD WITH RESTRICTED STARVATION WINDOWS ---
+  % Stage onsets = BASELINE events (unrestricted f), so that the window starts
+  % at the onset of the stage and the baseline timeline is the same for every
+  % reduction factor.
+  [tau_x0, tau_bx0] = get_tp(pars_tx, f_base_nest);
+  [tau_p0, tau_bp0] = get_tp(pars_tp, f_base_juvenile);
+  tT_x0 = (tau_x0 - tau_bx0)/ kT_M;     % d, baseline time since birth at fledging
+  tT_p0 = (tau_p0 - tau_bp0)/ kT_M;     % d, baseline time since birth at puberty
+  % Full-period scenario (APPENDIX C, par.ct36_full = 1): the reduced f is kept over the
+  % whole stage, which then ends at the event reached at the reduced f (Inf if never reached).
+  d = 7;                                % d, length of the restriction window (acute scenario)
+  if isfield(par, 'ct36_full') && par.ct36_full
+    d = Inf;
+    if f_nest ~= f_base_nest; tT_x0 = tT_x; tT_x0(isnan(tT_x0)) = Inf; end
+    if f_juvenile ~= f_base_juvenile; tT_p0 = tT_p; tT_p0(isnan(tT_p0)) = Inf; end
+  end
+
   % 1. Build the unstarved baseline timeline for the whole life cycle
-  % (Using the baseline parameters defined in pars_init)
   f = f_base_nest * ones(size(tW(:,1)));
-  f(tW(:,1) >= tT_x) = f_base_juvenile;
-  f(tW(:,1) >= tT_p) = f_base_adult;
+  f(tW(:,1) >= tT_x0) = f_base_juvenile;
+  f(tW(:,1) >= tT_p0) = f_base_adult;
   % 2. Apply the starvation ONLY if the runner modified the parameter
   % Nest stage starvation (starts at birth t=0, lasts max 7 days or until fledging)
   if f_nest ~= f_base_nest
-      f(tW(:,1) >= 0 & tW(:,1) < min(7, tT_x)) = f_nest;
+      f(tW(:,1) >= 0 & tW(:,1) < min(d, tT_x0)) = f_nest;
   end
-  % Juvenile stage starvation (starts at fledging t=tT_x, lasts 7 days)
+  % Juvenile stage starvation (starts at fledging, lasts 7 days)
   if f_juvenile ~= f_base_juvenile
-      f(tW(:,1) >= tT_x & tW(:,1) < tT_x + 7) = f_juvenile;
+      f(tW(:,1) >= tT_x0 & tW(:,1) < min(tT_x0 + d, tT_p0)) = f_juvenile;
   end
-  % Adult stage starvation (starts at puberty t=tT_p, lasts 7 days)
+  % Adult stage starvation (starts at puberty, lasts 7 days)
   if f_adult ~= f_base_adult
-      f(tW(:,1) >= tT_p & tW(:,1) < tT_p + 7) = f_adult;
+      f(tW(:,1) >= tT_p0 & tW(:,1) < tT_p0 + d) = f_adult;
   end
   % Build time–food table expected by get_tp
   tf = [tW(:,1) * kT_M, f];

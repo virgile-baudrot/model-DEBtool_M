@@ -19,25 +19,21 @@ function [prdData, info] = predict_Ichthyosaura_alpestris_CT36EFSA(par, data, au
   w_m = m_Em_m * w_E/ w_V;             % -, contribution of reserve to weight
   L_mm = v/ k_M/ g_m;                  % cm, max struct length
 
-  %% --- PRE-CHECK: Prevent ODE45 freezing for both sexes ---
-  v_H_max   = @(f_val) f_val * max(0, f_val - l_T)^2 * (max(0, f_val - l_T) + g) / (f_val + g) / k;
-  v_H_max_m = @(f_val) f_val * max(0, f_val - l_T)^2 * (max(0, f_val - l_T) + g_m) / (f_val + g_m) / k;
-  
-  if v_H_max(f_embryo) < v_Hp || v_H_max(f_nest) < v_Hp || v_H_max(f_juvenile) < v_Hp || v_H_max(f_adult) < v_Hp
-      info = 0; prdData = []; return;
-  end
-  if v_H_max_m(f_embryo) < v_Hpm || v_H_max_m(f_nest) < v_Hpm || v_H_max_m(f_juvenile) < v_Hpm || v_H_max_m(f_adult) < v_Hpm
-      info = 0; prdData = []; return;
-  end
-  %% --------------------------------------------------------
+  % ---------- zero-variate data: CHRONIC outputs
+  % Each stage f is held constant from birth (tj at f_nest, tp at f_juvenile)
+  % or over the whole life (Li, Wwi, Ri, am at f_adult).
+  % An event that cannot be reached at that f (ultimate maturity below the
+  % threshold, see get_tp.m) is returned as NaN; the run itself goes on.
+  % (The male g_m only rescales the parameters: same condition with v_Hpm.)
+  reach = @(f_val, vH) f_val * max(0, f_val - l_T)^2 > k * vH; % -, DEBtool condition
 
   % life cycle
   pars_tj = [g; k; l_T; v_Hb; v_Hj];               % compose parameter vector
-  [~, tau_b, ~, l_b] = get_tp(pars_tj, f_embryo);   % -, scaled times & lengths at f
-  [tau_j, ~, l_j, ~] = get_tp(pars_tj, f_nest);     % -, scaled times & lengths at f
   pars_tp = [g; k; l_T; v_Hb; v_Hp];               % compose parameter vector
-  [tau_p, ~, l_p, ~, info] = get_tp(pars_tp, f_juvenile); 
+  [tau_b, l_b, info] = get_tb([g; k; v_Hb], f_embryo); % -, scaled age & length at birth
   if ~info; prdData = []; return; end
+  [tau_j, tau_bj, l_j] = event_CT36EFSA(pars_tj, f_nest, reach(f_nest, v_Hj));
+  [tau_p, tau_bp, l_p] = event_CT36EFSA(pars_tp, f_juvenile, reach(f_juvenile, v_Hp));
   
   % birth
   L_b = L_m * l_b;                  % cm, structural length at birth at f
@@ -52,9 +48,9 @@ function [prdData, info] = predict_Ichthyosaura_alpestris_CT36EFSA(par, data, au
   Lw_p = L_p/ del_M;                % cm, SVL at puberty
 
   % metam
-  tT_j = (tau_j - tau_b)/ kT_M;          % d, time since birth at metamorphosis
-  % puberty 
-  tT_p = (tau_p - tau_b)/ kT_M;          % d, time since birth at puberty
+  tT_j = (tau_j - tau_bj)/ kT_M;         % d, time since birth at metamorphosis (NaN if not reached)
+  % puberty
+  tT_p = (tau_p - tau_bp)/ kT_M;         % d, time since birth at puberty (NaN if not reached)
 
   % ultimate
   l_i = f_adult - l_T;                    % -, scaled ultimate length
@@ -64,7 +60,11 @@ function [prdData, info] = predict_Ichthyosaura_alpestris_CT36EFSA(par, data, au
 
   % reproduction
   pars_R = [kap; kap_R; g; k_J; k_M; L_T; v; U_Hb; U_Hp]; % compose parameter vector at T
-  RT_i = TC * reprod_rate(L_i, f_adult, pars_R);% #/d, reprod rate 
+  if reach(f_adult, v_Hp)
+    RT_i = TC * reprod_rate(L_i, f_adult, pars_R);% #/d, reprod rate
+  else
+    RT_i = 0; % maturity maintenance at E_Hp exceeds the flux to maturity/reproduction
+  end
 
   % life span
   pars_tm = [g; l_T; h_a/ k_M^2; s_G];  % compose parameter vector at T_ref
@@ -73,13 +73,9 @@ function [prdData, info] = predict_Ichthyosaura_alpestris_CT36EFSA(par, data, au
   
   % Male events
   pars_tpm = [g_m; k; l_T; v_Hb; v_Hpm]; pars_tjm = [g_m; k; l_T; v_Hb; v_Hj];
-  [~, tau_bm, ~, l_bm] = get_tp(pars_tjm, f_embryo);
-  [tau_jm, ~, ~, ~] = get_tp(pars_tjm, f_nest);
-  [tau_pm, ~, l_pm, ~] = get_tp(pars_tpm, f_juvenile);
-  
-  tT_jm = (tau_jm - tau_bm)/ kT_M;
-  tT_pm = (tau_pm - tau_bm)/ kT_M;
-  
+  [tau_bm, l_bm] = get_tb([g_m; k; v_Hb], f_embryo);
+  [tau_pm, ~, l_pm] = event_CT36EFSA(pars_tpm, f_juvenile, reach(f_juvenile, v_Hpm));
+
   L_pm = L_mm * l_pm; Lw_pm = L_pm/ del_M;   % cm, SVL at puberty
   L_im = f_adult * L_mm; Lw_im = L_im/ del_M;% cm, ultimate struct, SVL
   Ww_im = L_im^3 * (1 + f_adult * w_m);      % g, ultimate wet weight
@@ -98,51 +94,81 @@ function [prdData, info] = predict_Ichthyosaura_alpestris_CT36EFSA(par, data, au
   prdData.Wwim = Ww_im;
   prdData.Ri = RT_i;
   
-  %% --- NEW PIECEWISE FOOD WITH A 1-DAY RESTRICTED STARVATION WINDOW ---
+  % ---------- uni-variate data: ACUTE scenario (n-day window)
+  %% --- PIECEWISE FOOD WITH A 336-DAY RESTRICTED WINDOW ---
   d_nest= 7*4*12;
-  d = 7*4*12; % 7 days * 12 weeks
+  d = 7*4*12; % d, 48 weeks = 336 days
+  % Stage onsets = BASELINE events (unrestricted f), so that the window starts
+  % at the onset of the stage and the baseline timeline is the same for every
+  % reduction factor.
+  [tau_j0, tau_bj0] = get_tp(pars_tj, f_base_nest);
+  [tau_p0, tau_bp0] = get_tp(pars_tp, f_base_juvenile);
+  tT_j = (tau_j0 - tau_bj0)/ kT_M;       % d, baseline time since birth at metamorphosis
+  tT_p = (tau_p0 - tau_bp0)/ kT_M;       % d, baseline time since birth at puberty
+  [tau_jm0, tau_bjm0] = get_tp(pars_tjm, f_base_nest);
+  [tau_pm0, tau_bpm0] = get_tp(pars_tpm, f_base_juvenile);
+  tT_jm = (tau_jm0 - tau_bjm0)/ kT_M;    % d, baseline male time since birth at metamorphosis
+  tT_pm = (tau_pm0 - tau_bpm0)/ kT_M;    % d, baseline male time since birth at puberty
+  % Full-period scenario (APPENDIX C, par.ct36_full = 1): the reduced f is kept over the
+  % whole stage, which then ends at the event reached at the reduced f (Inf if never reached).
+  is_full = isfield(par, 'ct36_full') && par.ct36_full;
+  if is_full
+    d = Inf; d_nest = Inf;
+    if f_nest ~= f_base_nest; tT_j = (tau_j - tau_bj)/ kT_M; tT_j(isnan(tT_j)) = Inf; end
+    if f_juvenile ~= f_base_juvenile; tT_p = (tau_p - tau_bp)/ kT_M; tT_p(isnan(tT_p)) = Inf; end
+  end
+  if is_full % male events at the reduced f
+    if f_nest ~= f_base_nest
+      [tau_jm1, tau_bjm1] = event_CT36EFSA(pars_tjm, f_nest, reach(f_nest, v_Hj));
+      tT_jm = (tau_jm1 - tau_bjm1)/ kT_M; tT_jm(isnan(tT_jm)) = Inf;
+    end
+    if f_juvenile ~= f_base_juvenile
+      [tau_pm1, tau_bpm1] = event_CT36EFSA(pars_tpm, f_juvenile, reach(f_juvenile, v_Hpm));
+      tT_pm = (tau_pm1 - tau_bpm1)/ kT_M; tT_pm(isnan(tT_pm)) = Inf;
+    end
+  end
   % === FEMALE ===
-  f_vec_f = f_base_nest * ones(size(tL_f(:,1)));
-  f_vec_f(tL_f(:,1) >= tT_j) = f_base_juvenile;
-  f_vec_f(tL_f(:,1) >= tT_p) = f_base_adult;
+  Tf = unique([0; tT_j; tT_p; min(d_nest, tT_j); tT_j + d; tT_p + d]); Tf = Tf(Tf >= 0 & isfinite(Tf)); % d, exact switch times of f
+  f_vec_f = f_base_nest * ones(size(Tf));
+  f_vec_f(Tf >= tT_j) = f_base_juvenile;
+  f_vec_f(Tf >= tT_p) = f_base_adult;
   
   if f_nest ~= f_base_nest
-      f_vec_f(tL_f(:,1) >= 0 & tL_f(:,1) < min(d_nest, tT_j)) = f_nest;
+      f_vec_f(Tf >= 0 & Tf < min(d_nest, tT_j)) = f_nest;
   end
   if f_juvenile ~= f_base_juvenile
-      f_vec_f(tL_f(:,1) >= tT_j & tL_f(:,1) < min(tT_j + d, tT_p)) = f_juvenile;
+      f_vec_f(Tf >= tT_j & Tf < min(tT_j + d, tT_p)) = f_juvenile;
   end
   if f_adult ~= f_base_adult
-      f_vec_f(tL_f(:,1) >= tT_p & tL_f(:,1) < tT_p + d) = f_adult;
+      f_vec_f(Tf >= tT_p & Tf < tT_p + d) = f_adult;
   end
   
   tau_run_f = tL_f(:,1) * kT_M;
-  tf_mat_f = [[-1; tau_run_f; tau_run_f(end)+100], [f_vec_f(1); f_vec_f; f_vec_f(end)]];
   
   el_0_f = [1; l_b]; 
-  [~, el_res_f] = ode45(@(t, y) dget_el_local(t, y, tf_mat_f, g, l_T), tau_run_f, el_0_f);
+  el_res_f = el_path_CT36EFSA(tau_run_f, Tf * kT_M, f_vec_f, el_0_f, g, l_T); % exact n-day windows
   ELw_f = L_m .* el_res_f(:, 2) / del_M;
   
   % === MALE ===
-  f_vec_m = f_base_nest * ones(size(tL_m(:,1)));
-  f_vec_m(tL_m(:,1) >= tT_jm) = f_base_juvenile;
-  f_vec_m(tL_m(:,1) >= tT_pm) = f_base_adult;
+  Tm = unique([0; tT_jm; tT_pm; min(d_nest, tT_jm); tT_jm + d; tT_pm + d]); Tm = Tm(Tm >= 0 & isfinite(Tm)); % d, exact switch times of f
+  f_vec_m = f_base_nest * ones(size(Tm));
+  f_vec_m(Tm >= tT_jm) = f_base_juvenile;
+  f_vec_m(Tm >= tT_pm) = f_base_adult;
   
   if f_nest ~= f_base_nest
-      f_vec_m(tL_m(:,1) >= 0 & tL_m(:,1) < min(d_nest, tT_jm)) = f_nest;
+      f_vec_m(Tm >= 0 & Tm < min(d_nest, tT_jm)) = f_nest;
   end
   if f_juvenile ~= f_base_juvenile
-      f_vec_m(tL_m(:,1) >= tT_jm & tL_m(:,1) < min(tT_jm + d, tT_pm)) = f_juvenile;
+      f_vec_m(Tm >= tT_jm & Tm < min(tT_jm + d, tT_pm)) = f_juvenile;
   end
   if f_adult ~= f_base_adult
-      f_vec_m(tL_m(:,1) >= tT_pm & tL_m(:,1) < tT_pm + d) = f_adult;
+      f_vec_m(Tm >= tT_pm & Tm < tT_pm + d) = f_adult;
   end
   
   tau_run_m = tL_m(:,1) * kT_M;
-  tf_mat_m = [[-1; tau_run_m; tau_run_m(end)+100], [f_vec_m(1); f_vec_m; f_vec_m(end)]];
   
   el_0_m = [1; l_bm]; 
-  [~, el_res_m] = ode45(@(t, y) dget_el_local(t, y, tf_mat_m, g_m, l_T), tau_run_m, el_0_m);
+  el_res_m = el_path_CT36EFSA(tau_run_m, Tm * kT_M, f_vec_m, el_0_m, g_m, l_T); % exact n-day windows
   ELw_m = L_mm .* el_res_m(:, 2) / del_M;
 
   % pack to output
@@ -162,4 +188,4 @@ function del = dget_el_local(tau, el, tf_mat, g, l_T)
     dl = l * rho / 3;
     
     del = [de; dl];
-end
+end
