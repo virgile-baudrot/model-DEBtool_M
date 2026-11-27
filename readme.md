@@ -18,6 +18,7 @@ reduction in 9 focal species (4 birds, 2 shrews, 2 amphibians, 1 lizard):
 - `CT36EFSA_pipeline/`: GNU Octave + R scripts that rerun all simulations and figures
 - `CT36EFSA_results/`: figures and CSV outputs of the report (section 3.3 and Appendix C)
 - `CT36EFSA_analysis/`: sensitivity analysis of the report's Chapter 2
+- `WINDOW_LENGTH_CT36EFSA.md`: why the amphibians use longer food-reduction windows (test, not in the report)
 
 The details are in [zoo_collection/README_CT36EFSA.md](zoo_collection/README_CT36EFSA.md):
 which file is which report figure, and how to reproduce everything.

@@ -35,7 +35,9 @@ is_full = strcmp(scenario, 'full'); sfx = ''; if is_full; sfx = '_full'; end
 outdir = fullfile(outroot, sp);
 if ~exist(outdir, 'dir'); mkdir(outdir); end
 
-cd(fullfile(root, 'zoo_collection', sp));
+spdir = getenv('CT36_SPDIR');            % optional: run a modified copy of the species folder
+if isempty(spdir); spdir = fullfile(root, 'zoo_collection', sp); end
+cd(spdir);
 [data, auxData, metaData] = feval(['mydata_' sp]);
 par_init = feval(['pars_init_' sp '_CT36EFSA'], metaData);
 par_init.ct36_full = double(is_full);

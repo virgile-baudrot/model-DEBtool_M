@@ -25,6 +25,7 @@ zoo_collection/
     el_path_CT36EFSA.m             reserve and length along a piecewise-constant food path
     octave_shims/                  MATLAB functions missing or different in Octave
   CT36EFSA_results/                outputs of run_all_CT36EFSA.sh (figures + CSV)
+  CT36EFSA_window_length/          test of the window length (not in the report), see WINDOW_LENGTH_CT36EFSA.md
   CT36EFSA_analysis/               Chapter 2 sensitivity analysis: plot_analysis_CT36EFSA.R, CSV inputs, figures
 ```
 
@@ -39,7 +40,8 @@ keep their baseline f.
   7 days for the birds, the shrews and *Podarcis*, 126 days for *Rana* and 336 days for
   *Ichthyosaura*. The two amphibians use longer windows (18 and 48 weeks) so that the effect
   can be seen on the figures: they grow slowly, and a 7-day window changes their length by at
-  most 2 %, even at factor 0.5.
+  most 2 %, even at factor 0.5. See [WINDOW_LENGTH_CT36EFSA.md](WINDOW_LENGTH_CT36EFSA.md)
+  for the comparison (also *Podarcis* with 4 to 16-week windows).
 - **full** (report Appendix C): the reduced f lasts the whole stage, which ends at the
   event reached at the reduced f. If that event is never reached, the restriction never ends.
   This scenario is selected with `par.ct36_full = 1` in the `predict_*_CT36EFSA.m` files.
