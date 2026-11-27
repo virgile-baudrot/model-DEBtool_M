@@ -37,7 +37,9 @@ keep their baseline f.
 - **acute** (report section 3.3): the reduced f lasts an n-day window that starts at the
   onset of the stage. The onsets are the baseline events (unrestricted f). The window is
   7 days for the birds, the shrews and *Podarcis*, 126 days for *Rana* and 336 days for
-  *Ichthyosaura*.
+  *Ichthyosaura*. The two amphibians use longer windows (18 and 48 weeks) so that the effect
+  can be seen on the figures: they grow slowly, and a 7-day window changes their length by at
+  most 2 %, even at factor 0.5.
 - **full** (report Appendix C): the reduced f lasts the whole stage, which ends at the
   event reached at the reduced f. If that event is never reached, the restriction never ends.
   This scenario is selected with `par.ct36_full = 1` in the `predict_*_CT36EFSA.m` files.
