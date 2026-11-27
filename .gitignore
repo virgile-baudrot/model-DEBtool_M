@@ -23,3 +23,21 @@ popDyn/IBMnlogo/set_pars.txt
 popDyn/IBMnlogo/spline_JX.txt
 popDyn/IBMnlogo/spline_TC.txt
 popDyn/IBMnlogo/txNL23W.txt
+.Rproj.user
+.claude/journal.md
+
+# Local files of the CT36 EFSA work (not versioned)
+REPORT_EFSA/
+00_DEB_CT36EFSA_SIMULATIONS/
+CT36EFSA_DEB_SIMULATIONS_*/
+MODIF.md
+MODIF_files/
+REVIEW*.md
+REVIEW*_files/
+*.zip
+*.bak
+*.Rproj
+.Rhistory
+.quarto/
+octave-workspace
+zoo_collection/CT36EFSA_analysis/*.html

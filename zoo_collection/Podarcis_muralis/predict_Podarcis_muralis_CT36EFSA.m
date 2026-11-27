@@ -21,23 +21,20 @@ function [prdData, info] = predict_Podarcis_muralis_CT36EFSA(par, data, auxData)
   w_m = m_Em_m * w_E/ w_V;             % -, contribution of reserve to weight
   L_mm = v/ k_M/ g_m;                  % cm, max struct length
 
-  %% --- PRE-CHECK: Prevent ODE45 freezing for both sexes ---
-  v_H_max   = @(f_val) f_val * max(0, f_val - l_T)^2 * (max(0, f_val - l_T) + g) / (f_val + g) / k;
-  v_H_max_m = @(f_val) f_val * max(0, f_val - l_T)^2 * (max(0, f_val - l_T) + g_m) / (f_val + g_m) / k;
-  
-  if v_H_max(f_embryo) < v_Hp || v_H_max(f_juvenile) < v_Hp || v_H_max(f_adult) < v_Hp
-      info = 0; prdData = []; return;
-  end
-  if v_H_max_m(f_embryo) < v_Hpm || v_H_max_m(f_juvenile) < v_Hpm || v_H_max_m(f_adult) < v_Hpm
-      info = 0; prdData = []; return;
-  end
-  %% --------------------------------------------------------
+  % ---------- zero-variate data: CHRONIC outputs
+  % Each stage f is held constant from birth (tp at f_juvenile) or over the
+  % whole life (Li, Wwi, Ri, am at f_adult); f_embryo is the mother's reserve
+  % density at egg production (egg size, reserve at hatching).
+  % An event that cannot be reached at that f (ultimate maturity below the
+  % threshold, see get_tp.m) is returned as NaN; the run itself goes on.
+  % (The male g_m only rescales the parameters: same condition with v_Hpm.)
+  reach = @(f_val, vH) f_val * max(0, f_val - l_T)^2 > k * vH; % -, DEBtool condition
 
   % life cycle
   pars_tp = [g k l_T v_Hb v_Hp];
-  [~, t_b, ~, l_b, info] = get_tp(pars_tp, f_embryo);     
+  [t_b, l_b, info] = get_tb([g; k; v_Hb], f_embryo); % -, scaled age & length at birth
   if ~info; prdData = []; return; end
-  [t_p, ~, l_p, ~, ~] = get_tp(pars_tp, f_juvenile);
+  [t_p, t_bp, l_p] = event_CT36EFSA(pars_tp, f_juvenile, reach(f_juvenile, v_Hp));
   
   % initial
   pars_UE0 = [V_Hb; g; k_J; k_M; v]; 
@@ -52,7 +49,7 @@ function [prdData, info] = predict_Podarcis_muralis_CT36EFSA(par, data, auxData)
   % puberty 
   L_p = L_m * l_p;                  
   Lw_p = L_p/ del_M;                
-  tT_p = (t_p-t_b)/ k_M/ TC_tp;     
+  tT_p = (t_p-t_bp)/ k_M/ TC_tp;    % d, time since birth at puberty (NaN if not reached)
 
   % ultimate
   l_i = f_adult - l_T;                    
@@ -62,7 +59,11 @@ function [prdData, info] = predict_Podarcis_muralis_CT36EFSA(par, data, auxData)
 
   % reproduction
   pars_R = [kap; kap_R; g; k_J; k_M; L_T; v; U_Hb; U_Hp]; 
-  RT_i = TC_Ri * reprod_rate(L_i, f_adult, pars_R);             
+  if reach(f_adult, v_Hp)
+    RT_i = TC_Ri * reprod_rate(L_i, f_adult, pars_R);
+  else
+    RT_i = 0; % maturity maintenance at E_Hp exceeds the flux to maturity/reproduction
+  end
 
   % life span
   pars_tm = [g; l_T; h_a/ k_M^2; s_G];  
@@ -73,9 +74,9 @@ function [prdData, info] = predict_Podarcis_muralis_CT36EFSA(par, data, auxData)
   L_im = L_mm * f_adult;
   Lw_im = L_im/ del_Mm; 
   pars_tpm = [g_m k l_T v_Hb v_Hpm];
-  [~, t_bm, ~, l_bm] = get_tp(pars_tpm, f_embryo, [l_b f_embryo*z/z_m l_b*z/z_m]);
-  [t_pm, ~, l_pm, ~] = get_tp(pars_tpm, f_juvenile, [l_b f_juvenile*z/z_m l_b*z/z_m]);
-  Lw_pm = L_mm * l_pm/ del_Mm;         
+  l_bm = l_b * z/ z_m;                 % -, male scaled length at birth (same egg as females)
+  [~, ~, l_pm] = event_CT36EFSA(pars_tpm, f_juvenile, reach(f_juvenile, v_Hpm), [t_b, f_juvenile, l_bm]);
+  Lw_pm = L_mm * l_pm/ del_Mm;
   Ww_im = L_im^3 * (1 + f_adult * w_m);      
 
   % pack to output
@@ -92,54 +93,70 @@ function [prdData, info] = predict_Podarcis_muralis_CT36EFSA(par, data, auxData)
   prdData.Wwim = Ww_im;
   prdData.Ri = RT_i;
   
+  % ---------- uni-variate data: ACUTE scenario (n-day window)
   %% --- CONTINUOUS ODE INTEGRATION (Robust against starvation freezes) ---
   d=7; % days, duration of altered f values
+  % Stage onsets = BASELINE events (unrestricted f), so that the window starts
+  % at the onset of the stage and the baseline timeline is the same for every
+  % reduction factor.
+  [t_p0, t_bp0] = get_tp(pars_tp, f_base_juvenile);
+  [t_pm0, t_bpm0] = get_tp(pars_tpm, f_base_juvenile, [t_b, f_base_juvenile, l_bm]);
+  tT_p = (t_p0 - t_bp0)/ k_M/ TC_tp;    % d, baseline female time since birth at puberty
+  % Full-period scenario (APPENDIX C, par.ct36_full = 1): the reduced f is kept over the
+  % whole stage, which then ends at the event reached at the reduced f (Inf if never reached).
+  is_full = isfield(par, 'ct36_full') && par.ct36_full;
+  if is_full
+    d = Inf;
+    if f_juvenile ~= f_base_juvenile; tT_p = (t_p - t_bp)/ k_M/ TC_tp; tT_p(isnan(tT_p)) = Inf; end
+  end
   % Time vector provided from runner script
   t_run = t_run; 
   tau_run_K = t_run * k_M * TC_K; % For plots matching 20C data
   tau_run_D = t_run * k_M * TC_D; 
 
   % === FEMALE ===
-  f_vec_f = f_base_juvenile * ones(size(t_run));
-  f_vec_f(t_run >= tT_p) = f_base_adult;
+  Tf = unique([0; tT_p; min(d, tT_p); tT_p + d]); Tf = Tf(Tf >= 0 & isfinite(Tf)); % d, exact switch times of f
+  f_vec_f = f_base_juvenile * ones(size(Tf));
+  f_vec_f(Tf >= tT_p) = f_base_adult;
   
   if f_juvenile ~= f_base_juvenile
-      f_vec_f(t_run >= 0 & t_run < min(d, tT_p)) = f_juvenile;
+      f_vec_f(Tf >= 0 & Tf < min(d, tT_p)) = f_juvenile;
   end
   if f_adult ~= f_base_adult
-      f_vec_f(t_run >= tT_p & t_run < tT_p + d) = f_adult;
+      f_vec_f(Tf >= tT_p & Tf < tT_p + d) = f_adult;
   end
   
-  tf_mat_fK = [[-1; tau_run_K; tau_run_K(end)+100], [f_vec_f(1); f_vec_f; f_vec_f(end)]];
-  tf_mat_fD = [[-1; tau_run_D; tau_run_D(end)+100], [f_vec_f(1); f_vec_f; f_vec_f(end)]];
   
   el_0_f = [1; l_b]; 
-  [~, el_res_fK] = ode45(@(t, y) dget_el_local(t, y, tf_mat_fK, g, l_T), tau_run_K, el_0_f);
-  [~, el_res_fD] = ode45(@(t, y) dget_el_local(t, y, tf_mat_fD, g, l_T), tau_run_D, el_0_f);
+  el_res_fK = el_path_CT36EFSA(tau_run_K, Tf * k_M * TC_K, f_vec_f, el_0_f, g, l_T); % exact n-day windows
+  el_res_fD = el_path_CT36EFSA(tau_run_D, Tf * k_M * TC_D, f_vec_f, el_0_f, g, l_T); % exact n-day windows
   
   ELw_fK = L_m .* el_res_fK(:, 2) / del_M;
   EWw_fK = (L_m .* el_res_fK(:, 2)).^3 .* (1 + el_res_fK(:, 1) .* w);
   ELw_fD = L_m .* el_res_fD(:, 2) / del_M;
 
   % === MALE ===
-  tT_pm = (t_pm - t_bm)/ k_M/ TC_tp;
-  f_vec_m = f_base_juvenile * ones(size(t_run));
-  f_vec_m(t_run >= tT_pm) = f_base_adult;
+  tT_pm = (t_pm0 - t_bpm0)/ k_M/ TC_tp; % d, baseline male time since birth at puberty
+  if is_full && f_juvenile ~= f_base_juvenile % male puberty at the reduced f
+    [t_pm1, t_bpm1] = event_CT36EFSA(pars_tpm, f_juvenile, reach(f_juvenile, v_Hpm), [t_b, f_juvenile, l_bm]);
+    tT_pm = (t_pm1 - t_bpm1)/ k_M/ TC_tp; tT_pm(isnan(tT_pm)) = Inf;
+  end
+  Tm = unique([0; tT_pm; min(d, tT_pm); tT_pm + d]); Tm = Tm(Tm >= 0 & isfinite(Tm)); % d, exact switch times of f
+  f_vec_m = f_base_juvenile * ones(size(Tm));
+  f_vec_m(Tm >= tT_pm) = f_base_adult;
 
   
   if f_juvenile ~= f_base_juvenile
-      f_vec_m(t_run >= 0 & t_run < min(d, tT_pm)) = f_juvenile;
+      f_vec_m(Tm >= 0 & Tm < min(d, tT_pm)) = f_juvenile;
   end
   if f_adult ~= f_base_adult
-      f_vec_m(t_run >= tT_pm & t_run < tT_pm + d) = f_adult;
+      f_vec_m(Tm >= tT_pm & Tm < tT_pm + d) = f_adult;
   end
   
-  tf_mat_mK = [[-1; tau_run_K; tau_run_K(end)+100], [f_vec_m(1); f_vec_m; f_vec_m(end)]];
-  tf_mat_mD = [[-1; tau_run_D; tau_run_D(end)+100], [f_vec_m(1); f_vec_m; f_vec_m(end)]];
   
   el_0_m = [1; l_bm]; 
-  [~, el_res_mK] = ode45(@(t, y) dget_el_local(t, y, tf_mat_mK, g_m, l_T), tau_run_K, el_0_m);
-  [~, el_res_mD] = ode45(@(t, y) dget_el_local(t, y, tf_mat_mD, g_m, l_T), tau_run_D, el_0_m);
+  el_res_mK = el_path_CT36EFSA(tau_run_K, Tm * k_M * TC_K, f_vec_m, el_0_m, g_m, l_T); % exact n-day windows
+  el_res_mD = el_path_CT36EFSA(tau_run_D, Tm * k_M * TC_D, f_vec_m, el_0_m, g_m, l_T); % exact n-day windows
   
   ELw_mK = L_mm .* el_res_mK(:, 2) / del_Mm;
   EWw_mK = (L_mm .* el_res_mK(:, 2)).^3 .* (1 + el_res_mK(:, 1) .* w_m);
@@ -164,7 +181,11 @@ function [prdData, info] = predict_Podarcis_muralis_CT36EFSA(par, data, auxData)
   prdData.plot_Ww_f  = EWw_fK;
   prdData.plot_Ww_m  = EWw_mK;
   prdData.plot_L_run = L_run;
-  prdData.plot_LN    = TC_LN * 365 * reprod_rate(L_run * del_M, f_adult, pars_R);
+  if reach(f_adult, v_Hp)
+    prdData.plot_LN    = TC_LN * 365 * reprod_rate(L_run * del_M, f_adult, pars_R);
+  else
+    prdData.plot_LN = 0 * L_run; % no reproduction below the chronic threshold (as Ri)
+  end
 
 end
 
@@ -180,4 +201,4 @@ function del = dget_el_local(tau, el, tf_mat, g, l_T)
     dl = l * rho / 3;
 
     del = [de; dl];
-end
+end
